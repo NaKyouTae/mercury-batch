@@ -1,0 +1,50 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.0.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'com.competition'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '14'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-batch'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	
+	// LomBok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	
+	// For Junit error 
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	
+	// DataBase
+	implementation 'com.h2database:h2'
+	compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.5.4'
+	
+	// Mail
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	compile "com.sun.mail:javax.mail"
+}
+
+test {
+	useJUnitPlatform()
+}

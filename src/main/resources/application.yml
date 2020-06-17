@@ -33,3 +33,5 @@ spring:
         hbm2ddl:
           auto: create
     generate-ddl: true
+#  quartz:
+#    job-store-type: jdbc

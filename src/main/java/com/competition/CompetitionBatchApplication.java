@@ -2,9 +2,10 @@ package com.competition;
 
 import org.quartz.SchedulerException;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import com.competition.quartz.schedule.QuartzScheduler;
 
@@ -12,12 +13,15 @@ import com.competition.quartz.schedule.QuartzScheduler;
 @SpringBootApplication
 public class CompetitionBatchApplication {
 	
-	@Autowired
-	private static QuartzScheduler qs = new QuartzScheduler();
+	private static final QuartzScheduler qs = new QuartzScheduler();
 	
 	public static void main(String[] args) throws SchedulerException {
 		SpringApplication.run(CompetitionBatchApplication.class, args);
-		qs.start();
 	}
-
+	@Bean
+	public CommandLineRunner runner() {
+		return (arg) -> {			
+			qs.start();
+		};
+	}
 }

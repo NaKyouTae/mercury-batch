@@ -1,4 +1,4 @@
-package com.competition.quartz.service.user;
+package com.competition.service.user;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,7 +10,7 @@ import com.competition.jpa.model.user.User;
 import com.competition.jpa.repository.user.UserQuartzRepository;
 
 @Service
-public class UserQuartzService {
+public class UserService {
 	
 	@Autowired
 	private UserQuartzRepository userQuartzRepository;

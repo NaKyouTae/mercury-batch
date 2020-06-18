@@ -1,4 +1,4 @@
-package com.competition.quartz.controller;
+package com.competition.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 

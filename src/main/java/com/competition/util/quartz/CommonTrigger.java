@@ -1,4 +1,4 @@
-package com.competition.quartz.util;
+package com.competition.util.quartz;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobDetail;

@@ -1,10 +1,12 @@
 package com.competition.service.mail;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
 
+import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.FileSystemResource;
@@ -14,10 +16,9 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.competition.config.MailConfig;
+import com.competition.jpa.model.mail.MailTemplate;
 import com.competition.jpa.model.mail.NewsLetter;
-import com.competition.jpa.model.system.config.SystemConfig;
 import com.competition.jpa.repository.mail.NewsLetterRepository;
-import com.competition.jpa.repository.system.config.SystemConfigRepository;
 
 @Service
 @SuppressWarnings("unchecked")
@@ -27,10 +28,13 @@ public class MailService {
 	private JavaMailSender mailSender;
 	
 	@Autowired
-	private SystemConfigRepository systemConfigRepository;
+	private MailTemplateService mailTemplateService;
 	
 	@Autowired
 	private NewsLetterRepository newsLetterRepository;
+	
+	@Autowired
+	private VelocityEngine velocity;
 	
 	public MailService() {
 		AnnotationConfigApplicationContext ct = new AnnotationConfigApplicationContext(MailConfig.class);
@@ -44,14 +48,17 @@ public class MailService {
 			
 			List<NewsLetter> sub = newsLetterRepository.findAll();
 			
-			SystemConfig mailTitle = systemConfigRepository.findByConfigName("emailCheckTitle");
-			SystemConfig mailContent = systemConfigRepository.findByConfigName("emailCheckContent");
+			MailTemplate temp = mailTemplateService.seMailTemplateByBatchId("NewsLetter");
+			
+			HashMap<String, Object> model = new HashMap<>();
+			
+//			velocity.mergeTemplate(temp.getBatchId(), temp.getContent(), model);
 			
 			for(NewsLetter s : sub) {
 				
 				sm.setTo(s.getUserEMail());
-				sm.setSubject(mailTitle.getConfigValue());
-				sm.setText(mailContent.getConfigValue());
+				sm.setSubject(temp.getTitle());
+				sm.setText(temp.getContent());
 				
 				mailSender.send(sm);
 			}

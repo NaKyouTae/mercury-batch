@@ -3,7 +3,6 @@ package com.competition.process.mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.competition.jpa.model.mail.MailTemplate;
 import com.competition.jpa.repository.mail.MailTemplateRepository;
 
 @Component
@@ -51,34 +50,6 @@ public class MailTemplateProcess {
 	public <T extends Object> T seMailTemplate(String idx) throws Exception {
 		try {
 			return (T) mailTemplateRepository.findByIdx(idx);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return (T) e;
-		}
-	}
-	
-	public <T extends Object> T inMailTemplate(MailTemplate temp) throws Exception {
-		try {
-			return (T) mailTemplateRepository.save(temp);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return (T) e;
-		}
-	}
-	
-	public <T extends Object> T upMailTemplate(MailTemplate temp) throws Exception {
-		try {
-			return (T) mailTemplateRepository.save(temp);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return (T) e;
-		}
-	}
-	
-	public <T extends Object> T deMailTemplate(MailTemplate temp) throws Exception {
-		try {
-			mailTemplateRepository.delete(temp);
-			return (T) Boolean.TRUE;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return (T) e;

@@ -11,12 +11,12 @@ import com.competition.jpa.model.three.Three;
 import com.competition.jpa.model.two.Two;
 import com.competition.jpa.model.user.User;
 import com.competition.jpa.model.user.UserGrade;
+import com.competition.jpa.model.word.Word;
 import com.competition.jpa.repository.grade.GradeRepository;
 import com.competition.jpa.repository.three.ThreeRepository;
 import com.competition.jpa.repository.two.TwoRepository;
 import com.competition.jpa.repository.user.UserGradeRepository;
 import com.competition.jpa.repository.word.WordRepository;
-import com.competition.jpa.repository.word.WordRepository.WordInter;
 import com.competition.process.user.UserProcess;
 
 @Service
@@ -77,7 +77,9 @@ public class UserService {
 	
 	public <T extends Object> T upUserThreePoint() throws Exception {
 		try {
-			WordInter word = wordRepository.findByWord("THREE");
+			Word word = wordRepository.findByWord("THREE");
+			
+			if(word == null) return (T) Boolean.FALSE;
 			
 			List<Three> three = threeRepository.findByWordIdx(word.getIdx(), Sort.by(Sort.Direction.DESC, "point"));
 			
@@ -102,7 +104,9 @@ public class UserService {
 	
 	public <T extends Object> T upUserTwoPoint() throws Exception {
 		try {
-			WordInter word = wordRepository.findByWord("TWO");
+			Word word = wordRepository.findByWord("TWO");
+			
+			if(word == null) return (T) Boolean.FALSE;
 			
 			List<Two> two = twoRepository.findByWordIdx(word.getIdx(), Sort.by(Sort.Direction.DESC, "point"));
 			

@@ -3,7 +3,6 @@ package com.competition.process.mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.competition.jpa.model.mail.NewsLetter;
 import com.competition.jpa.repository.mail.NewsLetterRepository;
 
 @Component
@@ -47,34 +46,4 @@ public class NewsLetterProcess {
 			return (T) e;
 		}
 	}
-	
-	public <T extends Object> T inNewsLetter(NewsLetter news) throws Exception {
-		try {
-			return (T) newsLetterRepository.save(news);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return (T) e;
-		}
-	}
-	
-	public <T extends Object> T upNewsLetter(NewsLetter news) throws Exception {
-		try {
-			return (T) newsLetterRepository.save(news);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return (T) e;
-		}
-	}
-	
-	public <T extends Object> T deNewsLetter(NewsLetter news) throws Exception {
-		try {
-			newsLetterRepository.delete(news);
-			return (T) Boolean.TRUE;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return (T) e;
-		}
-	}
-	
-	
 }

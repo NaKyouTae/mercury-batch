@@ -1,4 +1,4 @@
-package com.competition.jpa.model.quartz;
+package com.competition.jpa.model.user;
 
 import java.io.Serializable;
 
@@ -11,26 +11,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+
 @Data
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "QUARTJOB")
-public class QuartzJob implements Serializable {
-	
-	private static final long serialVersionUID = 5316254324233497690L;
+@Table(name ="USERGRADE")
+public class UserGrade implements Serializable {
+
+	private static final long serialVersionUID = -4309721016901765021L;
 
 	@Id
 	@Column
 	private String idx;
 	
 	@Column
-	private String key;
+	private String userIdx;
 	
 	@Column
-	private String description;
+	private String userName;
 	
 	@Column
-	private String clasz;
+	private String gradeIdx;
 	
+	@Column
+	private String gradeName;
+
 }

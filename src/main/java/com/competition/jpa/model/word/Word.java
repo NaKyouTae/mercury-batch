@@ -1,4 +1,4 @@
-package com.competition.jpa.model.quartz;
+package com.competition.jpa.model.word;
 
 import java.io.Serializable;
 
@@ -15,24 +15,25 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "QUARTTRIGGER")
-public class QuartTrigger implements Serializable {
-	
-	private static final long serialVersionUID = -1984362789674303002L;
-	
+@Table(name = "WORD")
+public class Word implements Serializable {
+
+	private static final long serialVersionUID = -1139838270144095544L;
+
 	@Id
 	@Column
-	private String Idx;
-	
+	private String idx;
 	@Column
-	private String key;
-	
+	private String wordGroup;
+	@Column
+	private String word;
 	@Column
 	private String description;
-	
 	@Column
-	private String cron;
-	
+	private String insertDate;
 	@Column
-	private String jobKey;
+	private String startDate;
+	@Column
+	private String endDate;
+
 }

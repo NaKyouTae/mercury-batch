@@ -11,20 +11,20 @@ import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.competition.jpa.model.quartz.QuartTrigger;
-import com.competition.jpa.repository.quartz.QuartzTriggerRepository;
+import com.competition.jpa.model.quartz.CustomTrigger;
+import com.competition.process.quartz.QuartzTriggerProcess;
 import com.competition.util.quartz.CommonTrigger;
 
 @Service
 @SuppressWarnings("unchecked")
-public class QuartService {
+public class QuartTriggerService {
 	
 	@Autowired
-	private QuartzTriggerRepository quartzTriggerRepository;
+	private QuartzTriggerProcess quartzTriggerProcess;
 	
 	public <T extends Object> T seTriggers() throws Exception{
 		try {
-			return (T) quartzTriggerRepository.findAll();
+			return (T) quartzTriggerProcess.seTriggers();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return (T) e;
@@ -40,19 +40,19 @@ public class QuartService {
 		}
 	}
 	
-	public <T extends Object> T upTriggerCron(QuartTrigger trigger) {
+	public <T extends Object> T upTriggerCron(CustomTrigger trigger) {
 		try {
 			Scheduler s = new StdSchedulerFactory().getScheduler();
 			
-			for(JobKey key : s.getJobKeys(GroupMatcher.jobGroupEquals(trigger.getJobKey()))) {				
+			for(JobKey key : s.getJobKeys(GroupMatcher.jobGroupEquals(trigger.getJobTitle()))) {				
 				List<CronTrigger> triggers = (List<CronTrigger>) s.getTriggersOfJob(key);
 				
 				Trigger nt = triggers.get(0);
-				nt = CommonTrigger.trigger(trigger.getKey(), trigger.getDescription(), trigger.getCron(), s.getJobDetail(key));
+				nt = CommonTrigger.trigger(trigger.getTitle(), trigger.getDescription(), trigger.getCron(), s.getJobDetail(key));
 				s.rescheduleJob(nt.getKey(), nt);
 			}
 			
-			quartzTriggerRepository.save(trigger);
+			quartzTriggerProcess.upTriggerCron(trigger);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

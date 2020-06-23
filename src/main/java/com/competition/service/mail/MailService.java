@@ -1,16 +1,20 @@
 package com.competition.service.mail;
 
 import java.io.File;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.mail.Message.RecipientType;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -44,21 +48,27 @@ public class MailService {
 	
 	public <T extends Object> T sendNewsLetter() throws Exception {
 		try {
-			SimpleMailMessage sm = new SimpleMailMessage();
+			
+			MimeMessage sm = this.mailSender.createMimeMessage();
 			
 			List<NewsLetter> sub = newsLetterRepository.findAll();
 			
 			MailTemplate temp = mailTemplateService.seMailTemplateByBatchId("NewsLetter");
 			
 			HashMap<String, Object> model = new HashMap<>();
+			model.put("user", sub);
+			Template velo = velocity.getTemplate(temp.getContent());
 			
-//			velocity.mergeTemplate(temp.getBatchId(), temp.getContent(), model);
+			VelocityContext context = new VelocityContext();
+			context.put("test", model);
+			StringWriter sw = new StringWriter();
 			
+			velo.merge(context, sw);
 			for(NewsLetter s : sub) {
 				
-				sm.setTo(s.getUserEMail());
+				sm.setRecipient(RecipientType.TO, new InternetAddress(s.getUserEMail()));
 				sm.setSubject(temp.getTitle());
-				sm.setText(temp.getContent());
+				sm.setText(sw.toString(), "UTF-8", "html");
 				
 				mailSender.send(sm);
 			}

@@ -1,6 +1,6 @@
 package com.competition;
 
-import java.util.UUID;
+import java.util.Arrays;
 
 import org.quartz.SchedulerException;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -17,6 +17,7 @@ import com.competition.jpa.repository.quartz.QuartzScheduleRepository;
 import com.competition.jpa.repository.quartz.QuartzTriggerRepository;
 import com.competition.schedule.QuartzScheduler;
 import com.competition.util.DateUtil;
+import com.competition.util.UUIDUtil;
 
 @EnableBatchProcessing
 @SpringBootApplication
@@ -31,87 +32,51 @@ public class CompetitionBatchApplication {
 	@Bean
 	public CommandLineRunner runner(QuartzScheduleRepository schedule, QuartzJobRepository job, QuartzTriggerRepository trigger) {
 		return (arg) -> {
-//			{
-//				// NewsLetter Mail JOB
-//				QuartzJob j = new QuartzJob();
-//				
-//				String jobIdx = UUID.randomUUID().toString().replace("-", "");
-//				
-//				j.setIdx(jobIdx);
-//				j.setName("NewsLetter");
-//				j.setInsertDate(DateUtil.now());
-//				j.setKey("NewsLetter Job");
-//				j.setDescription("for Send NewsLetter Job");
-//				j.setClasz("com.competition.job.NewsLetterJob");
-//				
-//				job.save(j);
-//				
-//				// NewsLetter Mail Trigger
-//				QuartzTrigger t = new QuartzTrigger();
-//				String TriggerIdx = UUID.randomUUID().toString().replace("-", "");
-//				
-//				t.setIdx(TriggerIdx);
-//				t.setName("NewsLetter");
-//				t.setInsertDate(DateUtil.now());
-//				t.setKey("NewsLetter Trigger");
-//				t.setDescription("for Send NewsLetter Trigger");
-//				t.setCron("0 0 0 * * 2");
-//				t.setJobKey(jobIdx);
-//				
-//				trigger.save(t);
-//				
-//				// NewsLetter Mail Schedule
-//				QuartzSchedule s = new QuartzSchedule();
-//				
-//				s.setIdx(UUID.randomUUID().toString().replace("-", ""));
-//				s.setName("NewsLetter");
-//				s.setInsertDate(DateUtil.now());
-//				s.setJobKIdx(jobIdx);
-//				s.setTriggerIdx(TriggerIdx);
-//				
-//				schedule.save(s);
-//			}
-			
 			{
-				// New Week JOB
-				CustomJob j = new CustomJob();
+				String week_j_idx = UUIDUtil.randomString();
+				String news_j_idx = UUIDUtil.randomString();
+				String black_j_idx = UUIDUtil.randomString();
+				String refresh_j_idx = UUIDUtil.randomString();
 				
-				String jobIdx = UUID.randomUUID().toString().replace("-", "");
+				job.saveAll(Arrays.asList(
+					// New Week JOB
+					CustomJob.builder().idx(week_j_idx).name("NewWeek").insertDate(DateUtil.now()).description("New Week Update User Mailege Job").clasz("UserJob").build(),
+					// NewsLetter Mail JOB
+					CustomJob.builder().idx(news_j_idx).name("NewsLetter").insertDate(DateUtil.now()).description("for Send NewsLetter Job").clasz("NewsLetterJob").build(),
+					// Black List Token Delete JOB
+					CustomJob.builder().idx(black_j_idx).name("Black").insertDate(DateUtil.now()).description("Delete Black Token Job").clasz("BlackListJob").build(),
+					// Refresh Token Delete JOB
+					CustomJob.builder().idx(refresh_j_idx).name("Refresh").insertDate(DateUtil.now()).description("Delete Refresh garbage Token Job").clasz("RefreshJob").build()
+				));
+
+				String week_t_idx = UUIDUtil.randomString();
+				String news_t_idx = UUIDUtil.randomString();
+				String black_t_idx = UUIDUtil.randomString();
+				String refresh_t_idx = UUIDUtil.randomString();
+
+				trigger.saveAll(Arrays.asList(
+					// New Week Trigger
+					CustomTrigger.builder().idx(week_t_idx).name("NewWeek").insertDate(DateUtil.now()).title("NewWeek Trigger").description("New Week Update User Mailege").cron("0 0/5 0 * * 2").jobTitle(week_t_idx).build(),
+					// NewsLetter Mail Trigger
+					CustomTrigger.builder().idx(news_t_idx).name("NewsLetter").insertDate(DateUtil.now()).title("NewsLetter Trigger").description("for Send NewsLetter Trigger").cron("0 0/5 0 * * 2").jobTitle(news_t_idx).build(),
+					// Black List Token Delete Trigger
+					CustomTrigger.builder().idx(black_t_idx).name("Black").insertDate(DateUtil.now()).title("Black Token Trigger").description("Delete Black List Token Trigger").cron("0 0 0 * * ?").jobTitle(black_t_idx).build(),
+					// Refresh Token Delete Trigger
+					CustomTrigger.builder().idx(refresh_t_idx).name("Refresh").insertDate(DateUtil.now()).title("Refresh Token Trigger").description("Delete Garbage Refresh Token Trigger").cron("0 0 0 * * ?").jobTitle(refresh_t_idx).build()
+				));
 				
-				j.setIdx(jobIdx);
-				j.setName("NewWeek");
-				j.setInsertDate(DateUtil.now());
-				j.setTitle("NewWeek Job");
-				j.setDescription("New Week Update User Mailege");
-				j.setClasz("com.competition.job.UserJob");
+				schedule.saveAll(Arrays.asList(
+					// New Week Schedule
+					CustomSchedule.builder().idx(UUIDUtil.randomString()).name("NewWeek").insertDate(DateUtil.now()).jobIdx(week_j_idx).triggerIdx(week_t_idx).build(),
+					// NewsLetter Mail Schedule
+					CustomSchedule.builder().idx(UUIDUtil.randomString()).name("NewsLetter").insertDate(DateUtil.now()).jobIdx(news_j_idx).triggerIdx(news_t_idx).build(),
+					// Black List Token Delete Schedule
+					CustomSchedule.builder().idx(UUIDUtil.randomString()).name("Black").insertDate(DateUtil.now()).jobIdx(black_j_idx).triggerIdx(black_t_idx).build(),
+					// Refresh Token Delete Schedule
+					CustomSchedule.builder().idx(UUIDUtil.randomString()).name("Refresh").insertDate(DateUtil.now()).jobIdx(refresh_j_idx).triggerIdx(refresh_t_idx).build()
+					
+				));
 				
-				job.save(j);
-				
-				// New Week Trigger
-				CustomTrigger t = new CustomTrigger();
-				String TriggerIdx = UUID.randomUUID().toString().replace("-", "");
-				
-				t.setIdx(TriggerIdx);
-				t.setName("NewWeek");
-				t.setInsertDate(DateUtil.now());
-				t.setTitle("NewWeek Trigger");
-				t.setDescription("New Week Update User Mailege");
-//				t.setCron("0 0 0 * * 2");
-				t.setCron("0/15 * * * * ?");
-				t.setJobTitle(jobIdx);
-				
-				trigger.save(t);
-				
-				// New Week Schedule
-				CustomSchedule s = new CustomSchedule();
-				
-				s.setIdx(UUID.randomUUID().toString().replace("-", ""));
-				s.setName("NewWeek");
-				s.setInsertDate(DateUtil.now());
-				s.setJobIdx(jobIdx);
-				s.setTriggerIdx(TriggerIdx);
-				
-				schedule.save(s);
 			}
 			
 			// Scheulder Start

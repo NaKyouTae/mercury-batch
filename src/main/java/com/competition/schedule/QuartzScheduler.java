@@ -42,7 +42,7 @@ public class QuartzScheduler {
 			CustomJob jobInfo = jobRepo.findByIdx(s.getJobIdx());
 			CustomTrigger triggerInfo = triggerRepo.findByIdx(s.getTriggerIdx());
 			
-			JobDetail job = CommonJobDetail.jobDetail(jobInfo.getTitle(), jobInfo.getDescription(), ClassLoaderUtil.getClass(jobInfo.getClasz()));
+			JobDetail job = CommonJobDetail.jobDetail(jobInfo.getTitle(), jobInfo.getDescription(), ClassLoaderUtil.getClass("com.competition.job." + jobInfo.getClasz()));
 			
 			Trigger t = CommonTrigger.trigger(triggerInfo.getTitle(), triggerInfo.getDescription(), triggerInfo.getCron(), job);
 			

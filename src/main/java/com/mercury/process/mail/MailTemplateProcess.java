@@ -1,0 +1,58 @@
+package com.mercury.process.mail;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.mercury.jpa.repository.mail.MailTemplateRepository;
+
+@Component
+@SuppressWarnings("unchecked")
+public class MailTemplateProcess {
+	@Autowired
+	private MailTemplateRepository mailTemplateRepository;
+	
+	public <T extends Object> T seMailTemplateByBatchId(String batch) throws Exception {
+		try {
+			return (T) mailTemplateRepository.findByBatchId(batch);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (T) e;
+		}
+	}
+	
+	public <T extends Object> T seMailTemplateByUsed(String use) throws Exception {
+		try {
+			return (T) mailTemplateRepository.findByUsed(use);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (T) e;
+		}
+	}
+	
+	public <T extends Object> T seMailTemplateByType(String type) throws Exception {
+		try {
+			return (T) mailTemplateRepository.findByType(type);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (T) e;
+		}
+	}
+	
+	public <T extends Object> T seMailTemplates() throws Exception {
+		try {
+			return (T) mailTemplateRepository.findAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (T) e;
+		}
+	}
+	
+	public <T extends Object> T seMailTemplate(String idx) throws Exception {
+		try {
+			return (T) mailTemplateRepository.findByIdx(idx);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (T) e;
+		}
+	}
+}

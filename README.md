@@ -1,2 +1,2 @@
-# competition-batch
-Spring Batch
+# Mercury-Batch
+Scheduler Server

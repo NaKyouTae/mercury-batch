@@ -7,16 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "GRADE")
+@Table(name = "MERCURY_TB_GRADE")
 public class Grade implements Serializable {
 
 	private static final long serialVersionUID = 1572166980328662694L;
@@ -28,6 +32,9 @@ public class Grade implements Serializable {
 	@Column
 	private String gradeName;
 		
+	@Column
+	private Integer gradeOrder;
+	
 	@Column
 	private String startRange;
 

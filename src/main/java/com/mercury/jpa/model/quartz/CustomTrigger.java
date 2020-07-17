@@ -19,7 +19,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "CUSTOMTRIGGER")
+@Table(name = "MERCURY_TB_QUARTZ_TRIGGER")
 public class CustomTrigger implements Serializable {
 	
 	private static final long serialVersionUID = -1984362789674303002L;

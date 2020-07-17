@@ -12,24 +12,6 @@ public class MailTemplateService {
 	@Autowired
 	private MailTemplateProcess mailTemplateProcess;
 	
-	public <T extends Object> T seMailTemplateByBatchId(String batch) throws Exception {
-		try {
-			return (T) mailTemplateProcess.seMailTemplateByBatchId(batch);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return (T) e;
-		}
-	}
-	
-	public <T extends Object> T seMailTemplateByUsed(String use) throws Exception {
-		try {
-			return (T) mailTemplateProcess.seMailTemplateByUsed(use);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return (T) e;
-		}
-	}
-	
 	public <T extends Object> T seMailTemplateByType(String type) throws Exception {
 		try {
 			return (T) mailTemplateProcess.seMailTemplateByType(type);

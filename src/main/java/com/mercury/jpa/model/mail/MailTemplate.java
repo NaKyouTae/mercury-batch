@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name="MAILTEMPLATE")
+@Table(name="MERCURY_TB_MAIL_TEMPLATE")
 public class MailTemplate implements Serializable{
 	
 	private static final long serialVersionUID = 7240577151586550963L;
@@ -30,16 +30,10 @@ public class MailTemplate implements Serializable{
 	@Column
 	private String title;
 	
-	@Column(name="content", length=5000)
-	private String content;
+	@Column
+	private String tempName;
 	
 	@Column
 	private String insertDate;
-	
-	@Column
-	private String used;
-	
-	@Column
-	private String batchId;	
 	
 }

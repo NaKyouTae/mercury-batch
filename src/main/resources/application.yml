@@ -30,8 +30,6 @@ spring:
     properties:
       hibernate:  
         format_sql: true
-        hbm2ddl:
-          auto: create
     generate-ddl: true
 #  quartz:
 #    job-store-type: jdbc

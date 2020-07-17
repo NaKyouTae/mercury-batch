@@ -8,5 +8,6 @@ import com.mercury.jpa.model.user.UserGrade;
 @Repository
 public interface UserGradeRepository extends JpaRepository<UserGrade, Long> {
 	UserGrade findByUserName(String userName);
+	
 	UserGrade findByGradeName(String gradeName);
 }

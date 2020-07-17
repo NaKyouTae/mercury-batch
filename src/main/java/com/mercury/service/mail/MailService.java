@@ -12,6 +12,8 @@ import javax.mail.internet.MimeMessage;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.RuntimeConstants;
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.FileSystemResource;
@@ -37,40 +39,61 @@ public class MailService {
 	@Autowired
 	private NewsLetterRepository newsLetterRepository;
 	
-	@Autowired
-	private VelocityEngine velocity;
+	private String tempLocation = "/bin/main/mailTemplate/";
 	
 	public MailService() {
 		AnnotationConfigApplicationContext ct = new AnnotationConfigApplicationContext(MailConfig.class);
 		this.mailSender = ct.getBean(JavaMailSender.class);
 	}
 	
+	public void sendTempMail(String target, String title, String text) throws Exception {
+		try {
+			MimeMessage sm = this.mailSender.createMimeMessage();
+			
+			sm.setRecipient(RecipientType.TO, new InternetAddress(target));
+			sm.setSubject(title);
+			sm.setText(text, "UTF-8", "html");
+			
+			this.mailSender.send(sm);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	 
+	public <T extends Object> T veloTemp(String temp) throws Exception {
+		try {
+			VelocityEngine velocity = new VelocityEngine();
+			
+			velocity.init();
+			velocity.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+			velocity.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+			
+			return (T) velocity.getTemplate(tempLocation + temp, "UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (T) e;
+		}
+	}
 	
 	public <T extends Object> T sendNewsLetter() throws Exception {
 		try {
 			
-			MimeMessage sm = this.mailSender.createMimeMessage();
-			
 			List<NewsLetter> sub = newsLetterRepository.findAll();
 			
-			MailTemplate temp = mailTemplateService.seMailTemplateByBatchId("NewsLetter");
+			MailTemplate temp = mailTemplateService.seMailTemplateByType("NewsLetter");
 			
 			HashMap<String, Object> model = new HashMap<>();
 			model.put("user", sub);
-			Template velo = velocity.getTemplate(temp.getContent());
-			
 			VelocityContext context = new VelocityContext();
-			context.put("test", model);
-			StringWriter sw = new StringWriter();
+			context.put("data", model);
 			
-			velo.merge(context, sw);
+			StringWriter sw = new StringWriter();
+			Template t = veloTemp(temp.getTempName());
+			t.merge(context, sw);
+			
 			for(NewsLetter s : sub) {
-				
-				sm.setRecipient(RecipientType.TO, new InternetAddress(s.getUserEMail()));
-				sm.setSubject(temp.getTitle());
-				sm.setText(sw.toString(), "UTF-8", "html");
-				
-				mailSender.send(sm);
+				// Send Mail Html Template
+				sendTempMail(s.getUserEMail(), temp.getTitle(), sw.toString());
 			}
 			
 			return (T) Boolean.TRUE;

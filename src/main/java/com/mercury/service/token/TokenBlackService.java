@@ -7,41 +7,41 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mercury.jpa.model.token.Refresh;
-import com.mercury.process.token.RefreshProcess;
+import com.mercury.jpa.model.token.TokenBlack;
+import com.mercury.process.token.TokenBlackProcess;
 import com.mercury.util.DateUtil;
 
 @Service
 @SuppressWarnings("unchecked")
-public class RefreshService {
+public class TokenBlackService {
 	
 	@Autowired
-	private RefreshProcess refreshProcess;
+	private TokenBlackProcess TokenBlackProcess;
 	
-	public <T extends Object> T getList() throws Exception {
+	public <T extends Object> T getTokenBlack() throws Exception {
 		try {
-			return (T) refreshProcess.getList();
+			return (T) TokenBlackProcess.getBlackList();
 		} catch (Exception e) {
 			 e.printStackTrace();
 			 return (T) e;
 		}
 	}
 	
-	public <T extends Object> T deRefresh() throws Exception {
+	public <T extends Object> T deTokenBlack() throws Exception {
 		try {
-			
 			Boolean result = Boolean.FALSE;
-			List<Refresh> list = getList();
+			List<TokenBlack> list = getTokenBlack();
+			 
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 			
-			for(Refresh l : list) {
+			for(TokenBlack l : list) {
 				Date insert = format.parse(l.getInsertDate());
 				Date now = format.parse(DateUtil.now());
 				
 				long d = insert.getTime() - now.getTime();
 				
 				if(d >= 0 && 31 >= d) {
-					result = refreshProcess.deRefresh(l);
+					result = TokenBlackProcess.deBlackList(l);
 				}
 			}
 			

@@ -19,7 +19,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "CUSTOMJOB")
+@Table(name = "MERCURY_TB_QUARTZ_JOB")
 public class CustomJob implements Serializable {
 	
 	private static final long serialVersionUID = -6396193715656287996L;

@@ -2,12 +2,12 @@ package com.mercury;
 
 import java.util.Arrays;
 
-import org.quartz.SchedulerException;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.mercury.jpa.model.quartz.CustomJob;
 import com.mercury.jpa.model.quartz.CustomSchedule;
@@ -15,20 +15,19 @@ import com.mercury.jpa.model.quartz.CustomTrigger;
 import com.mercury.jpa.repository.quartz.QuartzJobRepository;
 import com.mercury.jpa.repository.quartz.QuartzScheduleRepository;
 import com.mercury.jpa.repository.quartz.QuartzTriggerRepository;
-import com.mercury.schedule.QuartzScheduler;
+import com.mercury.schedule.CustomQuartzScheduler;
 import com.mercury.util.DateUtil;
 import com.mercury.util.UUIDUtil;
 
-@EnableBatchProcessing
-@SpringBootApplication
-public class MercuryBatchApplication {
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
+public class MercuryBatchApplication implements WebMvcConfigurer {
 	
-	private static final QuartzScheduler qs = new QuartzScheduler();
+	private static final CustomQuartzScheduler qs = new CustomQuartzScheduler();
 
-	public static void main(String[] args) throws SchedulerException {
+	public static void main(String[] args) {
 		SpringApplication.run(MercuryBatchApplication.class, args);
 	}
-	
+
 	@Bean
 	public CommandLineRunner runner(QuartzScheduleRepository schedule, QuartzJobRepository job, QuartzTriggerRepository trigger) {
 		return (arg) -> {

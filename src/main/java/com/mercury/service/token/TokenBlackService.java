@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mercury.jpa.model.token.TokenBlack;
@@ -15,8 +14,7 @@ import com.mercury.util.DateUtil;
 @SuppressWarnings("unchecked")
 public class TokenBlackService {
 	
-	@Autowired
-	private TokenBlackProcess TokenBlackProcess;
+	private static final TokenBlackProcess TokenBlackProcess = new TokenBlackProcess();
 	
 	public <T extends Object> T getTokenBlack() throws Exception {
 		try {

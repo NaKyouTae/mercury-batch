@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.mercury.jpa.model.quartz.CustomTrigger;
 import com.mercury.jpa.repository.quartz.QuartzTriggerRepository;
+import com.mercury.util.BeanUtil;
 
 @Component
 @SuppressWarnings("unchecked")
@@ -12,6 +13,15 @@ public class QuartzTriggerProcess {
 	
 	@Autowired
 	private QuartzTriggerRepository quartzTriggerRepository;
+	
+	public QuartzTriggerProcess() {
+		try {
+			this.quartzTriggerRepository = BeanUtil.getBean("quartzTriggerRepository");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public <T extends Object> T seTriggers() throws Exception {
 		try {

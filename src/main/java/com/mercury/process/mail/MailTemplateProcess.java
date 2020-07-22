@@ -4,12 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mercury.jpa.repository.mail.MailTemplateRepository;
+import com.mercury.util.BeanUtil;
 
 @Component
 @SuppressWarnings("unchecked")
 public class MailTemplateProcess {
 	@Autowired
 	private MailTemplateRepository mailTemplateRepository;
+	
+	public MailTemplateProcess() {
+		try {
+			this.mailTemplateRepository = (MailTemplateRepository) BeanUtil.getBean("mailTemplateRepository");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public <T extends Object> T seMailTemplateByType(String type) throws Exception {
 		try {

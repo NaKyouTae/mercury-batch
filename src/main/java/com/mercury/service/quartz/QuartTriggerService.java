@@ -20,7 +20,7 @@ import com.mercury.util.quartz.CommonTrigger;
 public class QuartTriggerService {
 	
 	@Autowired
-	private QuartzTriggerProcess quartzTriggerProcess;
+	private QuartzTriggerProcess quartzTriggerProcess = new QuartzTriggerProcess();
 	
 	public <T extends Object> T seTriggers() throws Exception{
 		try {

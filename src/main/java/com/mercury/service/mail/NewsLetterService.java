@@ -9,7 +9,7 @@ import com.mercury.process.mail.NewsLetterProcess;
 @SuppressWarnings("unchecked")
 public class NewsLetterService {
 	@Autowired
-	private NewsLetterProcess newsLetterProcess;
+	private NewsLetterProcess newsLetterProcess = new NewsLetterProcess();
 	
 	public <T extends Object> T seNewsLetterByUserName(String userName) throws Exception {
 		try {

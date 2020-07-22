@@ -25,16 +25,17 @@ import com.mercury.config.MailConfig;
 import com.mercury.jpa.model.mail.MailTemplate;
 import com.mercury.jpa.model.mail.NewsLetter;
 import com.mercury.jpa.repository.mail.NewsLetterRepository;
+import com.mercury.util.BeanUtil;
 
 @Service
 @SuppressWarnings("unchecked")
 public class MailService {
 	
 	@Autowired
-	private JavaMailSender mailSender;
+	private MailTemplateService mailTemplateService = new MailTemplateService();
 	
 	@Autowired
-	private MailTemplateService mailTemplateService;
+	private JavaMailSender mailSender;
 	
 	@Autowired
 	private NewsLetterRepository newsLetterRepository;
@@ -42,8 +43,14 @@ public class MailService {
 	private String tempLocation = "/bin/main/mailTemplate/";
 	
 	public MailService() {
-		AnnotationConfigApplicationContext ct = new AnnotationConfigApplicationContext(MailConfig.class);
-		this.mailSender = ct.getBean(JavaMailSender.class);
+		try {
+			AnnotationConfigApplicationContext ct = new AnnotationConfigApplicationContext(MailConfig.class);
+			this.mailSender = ct.getBean(JavaMailSender.class);
+			this.newsLetterRepository = BeanUtil.getBean("newsLetterRepository");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void sendTempMail(String target, String title, String text) throws Exception {

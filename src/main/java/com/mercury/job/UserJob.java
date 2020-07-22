@@ -1,34 +1,28 @@
 package com.mercury.job;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.quartz.Job;
+import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.mercury.service.user.UserService;
-import com.mercury.util.DateUtil;
+import com.mercury.util.BeanUtil;
+import com.mercury.util.JpaUtil;
 
 
-@Component
 public class UserJob implements Job{
-	private static final Logger LOGGER = LogManager.getLogger(UserJob.class);
-	
-	@Autowired
-	private UserService userService;
-	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		try {
-			LOGGER.info("NewsLetter Job Start");
-			// 삼행시 1~3등 포인트 지급
-			userService.upUserThreePoint();
-			// 이행시 1~3등 포인트 지급
-			userService.upUserTwoPoint();
+			UserService service = BeanUtil.getBean("userService");
+
+			JobDataMap data = context.getMergedJobDataMap();
+			JpaUtil.save(data);
 			
-			System.out.println("UserJob Start : " + DateUtil.now());
+			// 삼행시 1~3등 포인트 지급
+			service.upUserThreePoint();
+			// 이행시 1~3등 포인트 지급
+			service.upUserTwoPoint();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

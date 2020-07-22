@@ -15,15 +15,12 @@ import com.mercury.jpa.model.quartz.CustomTrigger;
 import com.mercury.jpa.repository.quartz.QuartzJobRepository;
 import com.mercury.jpa.repository.quartz.QuartzScheduleRepository;
 import com.mercury.jpa.repository.quartz.QuartzTriggerRepository;
-import com.mercury.schedule.CustomQuartzScheduler;
 import com.mercury.util.DateUtil;
 import com.mercury.util.UUIDUtil;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 public class MercuryBatchApplication implements WebMvcConfigurer {
 	
-	private static final CustomQuartzScheduler qs = new CustomQuartzScheduler();
-
 	public static void main(String[] args) {
 		SpringApplication.run(MercuryBatchApplication.class, args);
 	}
@@ -84,9 +81,6 @@ public class MercuryBatchApplication implements WebMvcConfigurer {
 				}
 				
 			}
-			
-			// Scheulder Start
-			qs.start();
 		};
 	}
 }

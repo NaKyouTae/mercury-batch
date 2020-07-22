@@ -10,7 +10,7 @@ import com.mercury.process.grade.GradeProcess;
 public class GradeService {
 	
 	@Autowired
-	private GradeProcess gradeProcess;
+	private GradeProcess gradeProcess = new GradeProcess();
 	
 	public <T extends Object> T seGrades() throws Exception {
 		try {

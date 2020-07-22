@@ -18,13 +18,14 @@ import com.mercury.jpa.repository.two.TwoRepository;
 import com.mercury.jpa.repository.user.UserGradeRepository;
 import com.mercury.jpa.repository.word.WordRepository;
 import com.mercury.process.user.UserProcess;
+import com.mercury.util.BeanUtil;
 
 @Service
 @SuppressWarnings("unchecked")
 public class UserService {
 	
 	@Autowired
-	private UserProcess userProcess;
+	private UserProcess userProcess = new UserProcess();
 	
 	@Autowired
 	private ThreeRepository threeRepository;
@@ -37,6 +38,18 @@ public class UserService {
 	@Autowired
 	private UserGradeRepository userGradeRepository;
 	
+	public UserService() {
+		try {
+			this.threeRepository = (ThreeRepository) BeanUtil.getBean("threeRepository");
+			this.twoRepository = (TwoRepository) BeanUtil.getBean("twoRepository");
+			this.wordRepository = (WordRepository) BeanUtil.getBean("wordRepository");
+			this.gradeRepository = (GradeRepository) BeanUtil.getBean("gradeRepository");
+			this.userGradeRepository = (UserGradeRepository) BeanUtil.getBean("userGradeRepository");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public <T extends Object> T seUsers() throws Exception {
 		try {

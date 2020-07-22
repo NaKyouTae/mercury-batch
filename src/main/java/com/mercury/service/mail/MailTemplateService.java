@@ -10,7 +10,7 @@ import com.mercury.process.mail.MailTemplateProcess;
 public class MailTemplateService {
 	
 	@Autowired
-	private MailTemplateProcess mailTemplateProcess;
+	private MailTemplateProcess mailTemplateProcess = new MailTemplateProcess();
 	
 	public <T extends Object> T seMailTemplateByType(String type) throws Exception {
 		try {

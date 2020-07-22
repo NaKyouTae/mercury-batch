@@ -16,7 +16,7 @@ import com.mercury.util.DateUtil;
 public class TokenRefreshService {
 	
 	@Autowired
-	private TokenRefreshProcess refreshProcess;
+	private TokenRefreshProcess refreshProcess = new TokenRefreshProcess();
 	
 	public <T extends Object> T getList() throws Exception {
 		try {

@@ -52,6 +52,7 @@ public class CustomQuartzScheduler {
 			jdata.put("triggername", triggerInfo.getName());
 			jdata.put("jobname", jobInfo.getName());
 			jdata.put("schedulename", s.getName());
+			jdata.put("message", jobInfo.getName() + " Start");
 			
 			JobDetail job = CommonJobDetail.jobDetail(jobInfo.getTitle(), jobInfo.getDescription(), ClassLoaderUtil.getClass("com.mercury.job." + jobInfo.getClasz()), jdata);
 			

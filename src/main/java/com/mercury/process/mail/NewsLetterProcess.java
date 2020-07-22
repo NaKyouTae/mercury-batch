@@ -4,12 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mercury.jpa.repository.mail.NewsLetterRepository;
+import com.mercury.util.BeanUtil;
 
 @Component
 @SuppressWarnings("unchecked")
 public class NewsLetterProcess {
 	@Autowired
 	private NewsLetterRepository newsLetterRepository;
+	
+	public NewsLetterProcess() {
+		try {
+			this.newsLetterRepository = (NewsLetterRepository) BeanUtil.getBean("newsLetterRepository");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public <T extends Object> T seNewsLetterByUserName(String userName) throws Exception {
 		try {

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.mercury.jpa.model.quartz.CustomSchedule;
 import com.mercury.jpa.repository.quartz.QuartzScheduleRepository;
+import com.mercury.util.BeanUtil;
 
 @Component
 @SuppressWarnings("unchecked")
@@ -12,6 +13,15 @@ public class QuartzScheduleProcess {
 	
 	@Autowired
 	private QuartzScheduleRepository quartzScheduleRepository;
+	
+	public QuartzScheduleProcess() {
+		try {
+			this.quartzScheduleRepository = BeanUtil.getBean("quartzScheduleRepository");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public <T extends Object> T seSchedules() throws Exception{
 		try {

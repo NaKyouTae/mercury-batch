@@ -3,8 +3,8 @@ package com.mercury.process.mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.mercury.config.ApplicationContextProvider;
 import com.mercury.jpa.repository.mail.NewsLetterRepository;
-import com.mercury.util.BeanUtil;
 
 @Component
 @SuppressWarnings("unchecked")
@@ -14,7 +14,7 @@ public class NewsLetterProcess {
 	
 	public NewsLetterProcess() {
 		try {
-			this.newsLetterRepository = (NewsLetterRepository) BeanUtil.getBean("newsLetterRepository");
+			this.newsLetterRepository = ApplicationContextProvider.getBean("newsLetterRepository");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -3,9 +3,9 @@ package com.mercury.process.token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.mercury.config.ApplicationContextProvider;
 import com.mercury.jpa.model.token.TokenBlack;
 import com.mercury.jpa.repository.token.TokenBlackRepository;
-import com.mercury.util.BeanUtil;
 
 @Component
 @SuppressWarnings("unchecked")
@@ -16,7 +16,7 @@ public class TokenBlackProcess {
 	
 	public TokenBlackProcess() {
 		try {
-			this.blackTokenRepository = (TokenBlackRepository) BeanUtil.getBean("tokenBlackRepository");
+			this.blackTokenRepository = ApplicationContextProvider.getBean("tokenBlackRepository");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

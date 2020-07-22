@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.mercury.config.ApplicationContextProvider;
 import com.mercury.jpa.model.grade.Grade;
 import com.mercury.jpa.model.three.Three;
 import com.mercury.jpa.model.two.Two;
@@ -18,7 +19,6 @@ import com.mercury.jpa.repository.two.TwoRepository;
 import com.mercury.jpa.repository.user.UserGradeRepository;
 import com.mercury.jpa.repository.word.WordRepository;
 import com.mercury.process.user.UserProcess;
-import com.mercury.util.BeanUtil;
 
 @Service
 @SuppressWarnings("unchecked")
@@ -40,11 +40,11 @@ public class UserService {
 	
 	public UserService() {
 		try {
-			this.threeRepository = (ThreeRepository) BeanUtil.getBean("threeRepository");
-			this.twoRepository = (TwoRepository) BeanUtil.getBean("twoRepository");
-			this.wordRepository = (WordRepository) BeanUtil.getBean("wordRepository");
-			this.gradeRepository = (GradeRepository) BeanUtil.getBean("gradeRepository");
-			this.userGradeRepository = (UserGradeRepository) BeanUtil.getBean("userGradeRepository");
+			this.threeRepository = ApplicationContextProvider.getBean("threeRepository");
+			this.twoRepository = ApplicationContextProvider.getBean("twoRepository");
+			this.wordRepository = ApplicationContextProvider.getBean("wordRepository");
+			this.gradeRepository = ApplicationContextProvider.getBean("gradeRepository");
+			this.userGradeRepository = ApplicationContextProvider.getBean("userGradeRepository");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

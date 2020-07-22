@@ -5,8 +5,8 @@ import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import com.mercury.config.ApplicationContextProvider;
 import com.mercury.service.user.UserService;
-import com.mercury.util.BeanUtil;
 import com.mercury.util.JpaUtil;
 
 
@@ -14,7 +14,7 @@ public class UserJob implements Job{
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		try {
-			UserService service = BeanUtil.getBean("userService");
+			UserService service = ApplicationContextProvider.getBean("userService");
 
 			JobDataMap data = context.getMergedJobDataMap();
 			JpaUtil.save(data);

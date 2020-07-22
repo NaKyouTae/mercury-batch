@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 @Component
+@SuppressWarnings("unchecked")
 public class ApplicationContextProvider implements ApplicationContextAware {
 
 	private static ApplicationContext context;
@@ -17,6 +18,10 @@ public class ApplicationContextProvider implements ApplicationContextAware {
 
     public static ApplicationContext getApplicationContext() {
         return context;
+    }
+    
+	public static <T extends Object> T getBean(String beanName) {
+    	return (T) context.getBean(beanName);
     }
 
 }

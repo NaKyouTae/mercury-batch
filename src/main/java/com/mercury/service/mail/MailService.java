@@ -21,11 +21,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.mercury.config.ApplicationContextProvider;
 import com.mercury.config.MailConfig;
 import com.mercury.jpa.model.mail.MailTemplate;
 import com.mercury.jpa.model.mail.NewsLetter;
 import com.mercury.jpa.repository.mail.NewsLetterRepository;
-import com.mercury.util.BeanUtil;
 
 @Service
 @SuppressWarnings("unchecked")
@@ -46,7 +46,7 @@ public class MailService {
 		try {
 			AnnotationConfigApplicationContext ct = new AnnotationConfigApplicationContext(MailConfig.class);
 			this.mailSender = ct.getBean(JavaMailSender.class);
-			this.newsLetterRepository = BeanUtil.getBean("newsLetterRepository");
+			this.newsLetterRepository = ApplicationContextProvider.getBean("newsLetterRepository");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

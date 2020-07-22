@@ -3,9 +3,9 @@ package com.mercury.process.token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.mercury.config.ApplicationContextProvider;
 import com.mercury.jpa.model.token.TokenRefresh;
 import com.mercury.jpa.repository.token.TokenRefreshRepository;
-import com.mercury.util.BeanUtil;
 
 @Component
 @SuppressWarnings("unchecked")
@@ -16,7 +16,7 @@ public class TokenRefreshProcess {
 	
 	public TokenRefreshProcess() {
 		try {
-			this.tokenRefreshRepository = (TokenRefreshRepository) BeanUtil.getBean("tokenRefreshRepository");
+			this.tokenRefreshRepository = ApplicationContextProvider.getBean("tokenRefreshRepository");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

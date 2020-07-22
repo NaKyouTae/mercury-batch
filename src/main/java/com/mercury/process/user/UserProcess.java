@@ -3,9 +3,9 @@ package com.mercury.process.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.mercury.config.ApplicationContextProvider;
 import com.mercury.jpa.model.user.User;
 import com.mercury.jpa.repository.user.UserRepository;
-import com.mercury.util.BeanUtil;
 
 @Component
 @SuppressWarnings("unchecked")
@@ -16,7 +16,7 @@ public class UserProcess {
 	
 	public UserProcess() {
 		try {
-			this.userRepository = BeanUtil.getBean("userRepository");
+			this.userRepository = ApplicationContextProvider.getBean("userRepository");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

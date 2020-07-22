@@ -3,9 +3,9 @@ package com.mercury.process.quartz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.mercury.config.ApplicationContextProvider;
 import com.mercury.jpa.model.quartz.CustomTrigger;
 import com.mercury.jpa.repository.quartz.QuartzTriggerRepository;
-import com.mercury.util.BeanUtil;
 
 @Component
 @SuppressWarnings("unchecked")
@@ -16,7 +16,7 @@ public class QuartzTriggerProcess {
 	
 	public QuartzTriggerProcess() {
 		try {
-			this.quartzTriggerRepository = BeanUtil.getBean("quartzTriggerRepository");
+			this.quartzTriggerRepository = ApplicationContextProvider.getBean("quartzTriggerRepository");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

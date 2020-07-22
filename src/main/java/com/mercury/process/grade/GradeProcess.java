@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import com.mercury.config.ApplicationContextProvider;
 import com.mercury.jpa.repository.grade.GradeRepository;
-import com.mercury.util.BeanUtil;
 
 @Component
 @SuppressWarnings("unchecked")
@@ -16,7 +16,7 @@ public class GradeProcess {
 	
 	public GradeProcess() {
 		try {
-			this.gradeRepository = (GradeRepository) BeanUtil.getBean("gradeRepository");
+			this.gradeRepository = ApplicationContextProvider.getBean("gradeRepository");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

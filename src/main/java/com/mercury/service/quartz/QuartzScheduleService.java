@@ -18,13 +18,13 @@ import org.springframework.stereotype.Service;
 public class QuartzScheduleService {
 	
 	
-	public <T extends Object> T stopSchedule(String triggerName) throws Exception{
+	public <T extends Object> T stopSchedule(String idx) throws Exception{
 		try {
 			SchedulerFactory sf = new StdSchedulerFactory();
 			
 			Scheduler s = sf.getScheduler();
 			
-			for(JobKey key : s.getJobKeys(GroupMatcher.jobGroupEquals(triggerName))) {
+			for(JobKey key : s.getJobKeys(GroupMatcher.jobGroupEquals(idx))) {
 				
 				JobDetail jobDetail = s.getJobDetail(key);
 				

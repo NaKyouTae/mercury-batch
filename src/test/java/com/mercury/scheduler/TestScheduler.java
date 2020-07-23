@@ -25,7 +25,7 @@ public class TestScheduler {
 			RestTemplate rest = new RestTemplate();
 			
 			ObjectMapper mapper = new ObjectMapper();
-			String str = mapper.writeValueAsString("Black Token Trigger");
+			String str = mapper.writeValueAsString("11b9d987bc1a4f7eaa5078b7c8a0272c");
 
 			MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 

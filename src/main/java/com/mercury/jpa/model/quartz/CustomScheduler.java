@@ -20,7 +20,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "MERCURY_TB_QUARTZ_SCHEDULE")
-public class CustomSchedule implements Serializable {
+public class CustomScheduler implements Serializable {
 
 	private static final long serialVersionUID = 5269345207014488526L;
 

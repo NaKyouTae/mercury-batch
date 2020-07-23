@@ -10,11 +10,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.mercury.jpa.model.quartz.CustomJob;
-import com.mercury.jpa.model.quartz.CustomSchedule;
+import com.mercury.jpa.model.quartz.CustomScheduler;
 import com.mercury.jpa.model.quartz.CustomTrigger;
-import com.mercury.jpa.repository.quartz.QuartzJobRepository;
-import com.mercury.jpa.repository.quartz.QuartzScheduleRepository;
-import com.mercury.jpa.repository.quartz.QuartzTriggerRepository;
+import com.mercury.jpa.repository.quartz.JobRepository;
+import com.mercury.jpa.repository.quartz.SchedulerRepository;
+import com.mercury.jpa.repository.quartz.TriggerRepository;
 import com.mercury.util.DateUtil;
 import com.mercury.util.UUIDUtil;
 
@@ -26,7 +26,7 @@ public class MercuryBatchApplication implements WebMvcConfigurer {
 	}
 
 	@Bean
-	public CommandLineRunner runner(QuartzScheduleRepository schedule, QuartzJobRepository job, QuartzTriggerRepository trigger) {
+	public CommandLineRunner runner(SchedulerRepository schedule, JobRepository job, TriggerRepository trigger) {
 		return (arg) -> {
 			{
 				String week_j_idx = UUIDUtil.randomString();
@@ -69,13 +69,13 @@ public class MercuryBatchApplication implements WebMvcConfigurer {
 				if(schedule.findAll().size() == 0) {
 					schedule.saveAll(Arrays.asList(
 						// New Week Schedule
-						CustomSchedule.builder().idx(UUIDUtil.randomString()).name("NewWeek").insertDate(DateUtil.now()).jobIdx(week_j_idx).triggerIdx(week_t_idx).build(),
+						CustomScheduler.builder().idx(UUIDUtil.randomString()).name("NewWeek").insertDate(DateUtil.now()).jobIdx(week_j_idx).triggerIdx(week_t_idx).build(),
 						// NewsLetter Mail Schedule
-						CustomSchedule.builder().idx(UUIDUtil.randomString()).name("NewsLetter").insertDate(DateUtil.now()).jobIdx(news_j_idx).triggerIdx(news_t_idx).build(),
+						CustomScheduler.builder().idx(UUIDUtil.randomString()).name("NewsLetter").insertDate(DateUtil.now()).jobIdx(news_j_idx).triggerIdx(news_t_idx).build(),
 						// Black List Token Delete Schedule
-						CustomSchedule.builder().idx(UUIDUtil.randomString()).name("TokenBlack").insertDate(DateUtil.now()).jobIdx(black_j_idx).triggerIdx(black_t_idx).build(),
+						CustomScheduler.builder().idx(UUIDUtil.randomString()).name("TokenBlack").insertDate(DateUtil.now()).jobIdx(black_j_idx).triggerIdx(black_t_idx).build(),
 						// Refresh Token Delete Schedule
-						CustomSchedule.builder().idx(UUIDUtil.randomString()).name("TokenRefresh").insertDate(DateUtil.now()).jobIdx(refresh_j_idx).triggerIdx(refresh_t_idx).build()
+						CustomScheduler.builder().idx(UUIDUtil.randomString()).name("TokenRefresh").insertDate(DateUtil.now()).jobIdx(refresh_j_idx).triggerIdx(refresh_t_idx).build()
 						
 					));
 				}

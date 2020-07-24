@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) {
-		web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/lib/**", "/h2console/**", "/service/**", "/oauth/**");		
+		web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/lib/**", "/h2console/**", "/batch/**");		
 	}
 	
 	@Override
@@ -38,19 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 			.authorizeRequests()
-			.antMatchers("/admin/**").hasRole("ADMIN")
-			.antMatchers("/service/**", "/users/**", "/user/**").permitAll()
+			.antMatchers("/batch/**").permitAll()
 			.anyRequest().authenticated().and()
 //			.cors().disable()
 			.csrf().disable();
-		
-		
-		http.logout()
-		.logoutUrl("/logout")
-		.logoutSuccessUrl("/")
-		.deleteCookies("JSESSIONID")
-		.invalidateHttpSession(true)
-		.clearAuthentication(true);
-		
 	}
 }

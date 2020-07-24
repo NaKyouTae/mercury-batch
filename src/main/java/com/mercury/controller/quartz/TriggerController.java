@@ -1,4 +1,4 @@
-package com.mercury.controller;
+package com.mercury.controller.quartz;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import com.mercury.service.quartz.TriggerService;
 
 @RestController
 @SuppressWarnings("unchecked")
-@RequestMapping("/service/batch/trigger")
+@RequestMapping("/batch/service/trigger")
 public class TriggerController {
 	
 	@Autowired

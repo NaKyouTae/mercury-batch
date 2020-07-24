@@ -1,4 +1,4 @@
-package com.mercury.controller;
+package com.mercury.controller.quartz;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import com.mercury.service.quartz.SchedulerService;
 
 @RestController
 @SuppressWarnings("unchecked")
-@RequestMapping("/service/batch/scheduler")
+@RequestMapping("/batch/service/scheduler")
 public class SchedulerController {
 
 	@Autowired

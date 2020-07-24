@@ -1,9 +1,13 @@
-package com.mercury.controller;
+package com.mercury.controller.quartz;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,12 +17,13 @@ import com.mercury.service.quartz.JobService;
 
 @RestController
 @SuppressWarnings("unchecked")
-@RequestMapping("/service/batch/job")
+@RequestMapping("/batch/service/job")
 public class JobController {
 
 	@Autowired
 	private JobService jobService;
 	
+	@GetMapping
 	public <T extends Object> T seJobs() throws Exception {
 		ControllerResponse<List<CustomJob>> res = new ControllerResponse<>();
 		try {
@@ -35,6 +40,7 @@ public class JobController {
 		return (T) res;
 	}
 	
+	@GetMapping("/idx")
 	public <T extends Object> T seJobByIdx(String idx) throws Exception {
 		ControllerResponse<CustomJob> res = new ControllerResponse<>();
 		try {
@@ -51,6 +57,7 @@ public class JobController {
 		return (T) res;
 	}
 	
+	@GetMapping("/title")
 	public <T extends Object> T seJobByTitle(String title) throws Exception {
 		ControllerResponse<CustomJob> res = new ControllerResponse<>();
 		try {
@@ -67,6 +74,7 @@ public class JobController {
 		return (T) res;
 	}
 	
+	@GetMapping("/name")
 	public <T extends Object> T seJobByName(String name) throws Exception {
 		ControllerResponse<CustomJob> res = new ControllerResponse<>();
 		try {
@@ -83,6 +91,7 @@ public class JobController {
 		return (T) res;
 	}
 	
+	@GetMapping("/clasz")
 	public <T extends Object> T seJobByClasz(String clasz) throws Exception {
 		ControllerResponse<CustomJob> res = new ControllerResponse<>();
 		try {
@@ -99,6 +108,7 @@ public class JobController {
 		return (T) res;
 	}
 	
+	@PostMapping
 	public <T extends Object> T inJob(CustomJob job) throws Exception {
 		ControllerResponse<CustomJob> res = new ControllerResponse<>();
 		try {
@@ -115,6 +125,7 @@ public class JobController {
 		return (T) res;
 	}
 	
+	@PutMapping
 	public <T extends Object> T upJob(CustomJob job) throws Exception {
 		ControllerResponse<CustomJob> res = new ControllerResponse<>();
 		try {
@@ -131,6 +142,7 @@ public class JobController {
 		return (T) res;
 	}
 	
+	@DeleteMapping
 	public <T extends Object> T deJob(CustomJob job) throws Exception {
 		ControllerResponse<CustomJob> res = new ControllerResponse<>();
 		try {

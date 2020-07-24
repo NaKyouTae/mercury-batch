@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -109,7 +110,7 @@ public class JobController {
 	}
 	
 	@PostMapping
-	public <T extends Object> T inJob(CustomJob job) throws Exception {
+	public <T extends Object> T inJob(@RequestBody CustomJob job) throws Exception {
 		ControllerResponse<CustomJob> res = new ControllerResponse<>();
 		try {
 			res.setMessage("Success Insert Job :) ");
@@ -126,7 +127,7 @@ public class JobController {
 	}
 	
 	@PutMapping
-	public <T extends Object> T upJob(CustomJob job) throws Exception {
+	public <T extends Object> T upJob(@RequestBody CustomJob job) throws Exception {
 		ControllerResponse<CustomJob> res = new ControllerResponse<>();
 		try {
 			res.setMessage("Success Update Job :) ");
@@ -143,7 +144,7 @@ public class JobController {
 	}
 	
 	@DeleteMapping
-	public <T extends Object> T deJob(CustomJob job) throws Exception {
+	public <T extends Object> T deJob(@RequestBody CustomJob job) throws Exception {
 		ControllerResponse<CustomJob> res = new ControllerResponse<>();
 		try {
 			res.setMessage("Success Delete Job :) ");

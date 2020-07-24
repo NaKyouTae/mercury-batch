@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -124,7 +125,7 @@ public class TriggerController {
 		return (T) res;
 	}
 	
-	public <T extends Object> T upTriggerCron(CustomTrigger trigger) {
+	public <T extends Object> T upTriggerCron(@RequestBody CustomTrigger trigger) {
 		ControllerResponse<CustomTrigger> res = new ControllerResponse<>();
 		
 		try {
@@ -141,7 +142,7 @@ public class TriggerController {
 		return (T) res;
 	}
 	
-	public <T extends Object> T upTrigger(CustomTrigger trigger) throws Exception {
+	public <T extends Object> T upTrigger(@RequestBody CustomTrigger trigger) throws Exception {
 		ControllerResponse<CustomTrigger> res = new ControllerResponse<>();
 		
 		try {
@@ -158,7 +159,7 @@ public class TriggerController {
 		return (T) res;
 	}
 	
-	public <T extends Object> T inTrigger(CustomTrigger trigger) throws Exception {
+	public <T extends Object> T inTrigger(@RequestBody CustomTrigger trigger) throws Exception {
 		ControllerResponse<CustomTrigger> res = new ControllerResponse<>();
 		
 		try {
@@ -175,7 +176,7 @@ public class TriggerController {
 		return (T) res;
 	}
 	
-	public <T extends Object> T deTrigger(CustomTrigger trigger) throws Exception {
+	public <T extends Object> T deTrigger(@RequestBody CustomTrigger trigger) throws Exception {
 		ControllerResponse<CustomTrigger> res = new ControllerResponse<>();
 		
 		try {

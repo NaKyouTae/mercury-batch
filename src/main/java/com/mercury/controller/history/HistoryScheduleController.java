@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -135,7 +136,7 @@ public class HistoryScheduleController {
 	}
 	
 	@DeleteMapping
-	public <T extends Object> T deScheduleHistory(HistorySchedule schedule) throws Exception {
+	public <T extends Object> T deScheduleHistory(@RequestBody HistorySchedule schedule) throws Exception {
 		ControllerResponse<Boolean> res = new ControllerResponse<>();
 		try {
 			res.setMessage("Success Delete Schedule History :) ");

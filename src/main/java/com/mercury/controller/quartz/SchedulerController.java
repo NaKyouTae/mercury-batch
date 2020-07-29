@@ -24,11 +24,29 @@ public class SchedulerController {
 	@Autowired
 	private SchedulerService schedulerService;
 	
+	@GetMapping("/start") 
+	public <T extends Object> T startScheduler(String idx) throws Exception {
+		ControllerResponse<Boolean> res = new ControllerResponse<>();
+		try {
+			res.setMessage("Success Start Scheduler By Index :) ");
+			res.setResultCode(HttpStatus.OK);
+			res.setResult(schedulerService.startScheduler(idx));
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setMessage(e.getMessage());
+			res.setResultCode(HttpStatus.INTERNAL_SERVER_ERROR);
+			res.setResult(null);
+		}
+		return (T) res;
+	}
+	
 	@DeleteMapping("/stop")
 	public <T extends Object> T stopScheduler(@RequestBody String triggerName) throws Exception {
 		ControllerResponse<Boolean> res = new ControllerResponse<>();
 		try {
-			return (T) schedulerService.stopSchedule(triggerName);
+			res.setMessage("Success Stop Scheduler :) ");
+			res.setResultCode(HttpStatus.OK);
+			res.setResult(schedulerService.stopSchedule(triggerName));
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setMessage(e.getMessage());

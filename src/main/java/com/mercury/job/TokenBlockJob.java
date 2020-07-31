@@ -5,19 +5,19 @@ import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 
 import com.mercury.config.ApplicationContextProvider;
-import com.mercury.service.token.TokenBlackService;
+import com.mercury.service.token.TokenBlockService;
 import com.mercury.util.JpaUtil;
 
-public class TokenBlackJob implements Job{
+public class TokenBlockJob implements Job{
 
 	@Override
 	public void execute(JobExecutionContext context) {
 		try {
-			TokenBlackService service = ApplicationContextProvider.getBean("tokenBlackService");
+			TokenBlockService service = ApplicationContextProvider.getBean("tokenBlockService");
 			JobDataMap data = context.getMergedJobDataMap();
 			JpaUtil.save(data);
 
-			service.deTokenBlack();
+			service.deTokenBlock();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

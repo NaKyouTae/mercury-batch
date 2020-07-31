@@ -4,37 +4,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mercury.config.ApplicationContextProvider;
-import com.mercury.jpa.model.token.TokenBlack;
-import com.mercury.jpa.repository.token.TokenBlackRepository;
+import com.mercury.jpa.model.token.TokenBlock;
+import com.mercury.jpa.repository.token.TokenBlockRepository;
 
 @Component
 @SuppressWarnings("unchecked")
-public class TokenBlackProcess {
+public class TokenBlockProcess {
 	
 	@Autowired
-	private TokenBlackRepository blackTokenRepository;
+	private TokenBlockRepository blockTokenRepository;
 	
-	public TokenBlackProcess() {
+	public TokenBlockProcess() {
 		try {
-			this.blackTokenRepository = ApplicationContextProvider.getBean("tokenBlackRepository");
+			this.blockTokenRepository = ApplicationContextProvider.getBean("tokenBlockRepository");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public <T extends Object> T getBlackList() throws Exception {
+	public <T extends Object> T getBlockList() throws Exception {
 		try {
-			return (T) blackTokenRepository.findAll();
+			return (T) blockTokenRepository.findAll();
 		} catch (Exception e) {
 			 e.printStackTrace();
 			 return (T) e;
 		}
 	}
 	
-	public <T extends Object> T deBlackList(TokenBlack black) throws Exception {
+	public <T extends Object> T deBlockList(TokenBlock block) throws Exception {
 		try {
-			blackTokenRepository.delete(black);
+			blockTokenRepository.delete(block);
 			return (T) Boolean.TRUE;
 		} catch (Exception e) {
 			 e.printStackTrace();

@@ -39,7 +39,7 @@ public class MercuryBatchApplication implements WebMvcConfigurer {
 			{
 				String week_j_idx = UUIDUtil.randomString();
 				String news_j_idx = UUIDUtil.randomString();
-				String black_j_idx = UUIDUtil.randomString();
+				String block_j_idx = UUIDUtil.randomString();
 				String refresh_j_idx = UUIDUtil.randomString();
 				
 				if(job.findAll().size() == 0) {
@@ -48,8 +48,8 @@ public class MercuryBatchApplication implements WebMvcConfigurer {
 						CustomJob.builder().idx(week_j_idx).name("NewWeek").title("NewWeek Job").insertDate(DateUtil.now()).description("New Week Update User Mailege Job").clasz("UserJob").build(),
 						// NewsLetter Mail JOB
 						CustomJob.builder().idx(news_j_idx).name("NewsLetter").title("NewsLetter Job").insertDate(DateUtil.now()).description("for Send NewsLetter Job").clasz("NewsLetterJob").build(),
-						// Black List Token Delete JOB
-						CustomJob.builder().idx(black_j_idx).name("TokenBlack").title("Black Token Job").insertDate(DateUtil.now()).description("Delete Black Token Job").clasz("TokenBlackJob").build(),
+						// Block List Token Delete JOB
+						CustomJob.builder().idx(block_j_idx).name("TokenBlock").title("Block Token Job").insertDate(DateUtil.now()).description("Delete Block Token Job").clasz("TokenBlockJob").build(),
 						// Refresh Token Delete JOB
 						CustomJob.builder().idx(refresh_j_idx).name("TokenRefresh").title("Refresh Token Job").insertDate(DateUtil.now()).description("Delete Refresh garbage Token Job").clasz("TokenRefreshJob").build()
 					));
@@ -58,7 +58,7 @@ public class MercuryBatchApplication implements WebMvcConfigurer {
 
 				String week_t_idx = UUIDUtil.randomString();
 				String news_t_idx = UUIDUtil.randomString();
-				String black_t_idx = UUIDUtil.randomString();
+				String block_t_idx = UUIDUtil.randomString();
 				String refresh_t_idx = UUIDUtil.randomString();
 
 				if(trigger.findAll().size() == 0) {
@@ -67,8 +67,8 @@ public class MercuryBatchApplication implements WebMvcConfigurer {
 						CustomTrigger.builder().idx(week_t_idx).name("NewWeek").insertDate(DateUtil.now()).title("NewWeek Trigger").description("New Week Update User Mailege").cron("0 5 0 ? * MON").jobTitle(week_t_idx).build(),
 						// NewsLetter Mail Trigger
 						CustomTrigger.builder().idx(news_t_idx).name("NewsLetter").insertDate(DateUtil.now()).title("NewsLetter Trigger").description("for Send NewsLetter Trigger").cron("0 5 0 ? * MON").jobTitle(news_t_idx).build(),
-						// Black List Token Delete Trigger
-						CustomTrigger.builder().idx(black_t_idx).name("TokenBlack").insertDate(DateUtil.now()).title("Black Token Trigger").description("Delete Black List Token Trigger").cron("0 0 0 * * ?").jobTitle(black_t_idx).build(),
+						// Block List Token Delete Trigger
+						CustomTrigger.builder().idx(block_t_idx).name("TokenBlock").insertDate(DateUtil.now()).title("Block Token Trigger").description("Delete Block List Token Trigger").cron("0 0 0 * * ?").jobTitle(block_t_idx).build(),
 						// Refresh Token Delete Trigger
 						CustomTrigger.builder().idx(refresh_t_idx).name("TokenRefresh").insertDate(DateUtil.now()).title("Refresh Token Trigger").description("Delete Garbage Refresh Token Trigger").cron("0 0 0 * * ?").jobTitle(refresh_t_idx).build()
 					));	
@@ -80,8 +80,8 @@ public class MercuryBatchApplication implements WebMvcConfigurer {
 						CustomScheduler.builder().idx(UUIDUtil.randomString()).name("NewWeek").insertDate(DateUtil.now()).jobIdx(week_j_idx).triggerIdx(week_t_idx).build(),
 						// NewsLetter Mail Schedule
 						CustomScheduler.builder().idx(UUIDUtil.randomString()).name("NewsLetter").insertDate(DateUtil.now()).jobIdx(news_j_idx).triggerIdx(news_t_idx).build(),
-						// Black List Token Delete Schedule
-						CustomScheduler.builder().idx(UUIDUtil.randomString()).name("TokenBlack").insertDate(DateUtil.now()).jobIdx(black_j_idx).triggerIdx(black_t_idx).build(),
+						// Block List Token Delete Schedule
+						CustomScheduler.builder().idx(UUIDUtil.randomString()).name("TokenBlock").insertDate(DateUtil.now()).jobIdx(block_j_idx).triggerIdx(block_t_idx).build(),
 						// Refresh Token Delete Schedule
 						CustomScheduler.builder().idx(UUIDUtil.randomString()).name("TokenRefresh").insertDate(DateUtil.now()).jobIdx(refresh_j_idx).triggerIdx(refresh_t_idx).build()
 						

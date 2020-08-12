@@ -45,13 +45,13 @@ public class MercuryBatchApplication implements WebMvcConfigurer {
 				if(job.findAll().size() == 0) {
 					job.saveAll(Arrays.asList(
 						// New Week JOB
-						CustomJob.builder().idx(week_j_idx).name("NewWeek").title("NewWeek Job").insertDate(DateUtil.now()).description("New Week Update User Mailege Job").clasz("UserJob").build(),
+						CustomJob.builder().idx(week_j_idx).name("NewWeek").title("NewWeek Job").insertDate(DateUtil.now()).description("New Week Update User Mailege Job").clasz("UserJob").execute(Boolean.TRUE).build(),
 						// NewsLetter Mail JOB
-						CustomJob.builder().idx(news_j_idx).name("NewsLetter").title("NewsLetter Job").insertDate(DateUtil.now()).description("for Send NewsLetter Job").clasz("NewsLetterJob").build(),
+						CustomJob.builder().idx(news_j_idx).name("NewsLetter").title("NewsLetter Job").insertDate(DateUtil.now()).description("for Send NewsLetter Job").clasz("NewsLetterJob").execute(Boolean.TRUE).build(),
 						// Block List Token Delete JOB
-						CustomJob.builder().idx(block_j_idx).name("TokenBlock").title("Block Token Job").insertDate(DateUtil.now()).description("Delete Block Token Job").clasz("TokenBlockJob").build(),
+						CustomJob.builder().idx(block_j_idx).name("TokenBlock").title("Block Token Job").insertDate(DateUtil.now()).description("Delete Block Token Job").clasz("TokenBlockJob").execute(Boolean.TRUE).build(),
 						// Refresh Token Delete JOB
-						CustomJob.builder().idx(refresh_j_idx).name("TokenRefresh").title("Refresh Token Job").insertDate(DateUtil.now()).description("Delete Refresh garbage Token Job").clasz("TokenRefreshJob").build()
+						CustomJob.builder().idx(refresh_j_idx).name("TokenRefresh").title("Refresh Token Job").insertDate(DateUtil.now()).description("Delete Refresh garbage Token Job").clasz("TokenRefreshJob").execute(Boolean.TRUE).build()
 					));
 				}
 				

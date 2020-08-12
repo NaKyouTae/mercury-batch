@@ -42,4 +42,7 @@ public class CustomJob implements Serializable {
 	
 	@Column
 	private String insertDate;
+	
+	@Column
+	private Boolean execute = Boolean.TRUE;
 }

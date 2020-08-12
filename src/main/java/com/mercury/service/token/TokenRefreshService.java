@@ -29,7 +29,7 @@ public class TokenRefreshService {
 	
 	public <T extends Object> T deRefresh() throws Exception {
 		try {
-			
+			System.out.println("token refre service");
 			Boolean result = Boolean.FALSE;
 			List<TokenRefresh> list = getList();
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");

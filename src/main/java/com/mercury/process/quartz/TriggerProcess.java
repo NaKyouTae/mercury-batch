@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import com.mercury.config.ApplicationContextProvider;
 import com.mercury.jpa.model.quartz.CustomTrigger;
 import com.mercury.jpa.repository.quartz.TriggerRepository;
+import com.mercury.util.DateUtil;
+import com.mercury.util.UUIDUtil;
 
 @Component
 @SuppressWarnings("unchecked")
@@ -59,9 +61,9 @@ public class TriggerProcess {
 		}
 	}
 	
-	public <T extends Object> T seTriggerByJobTitle(String jobTitle) throws Exception {
+	public <T extends Object> T seTriggerByJobIdx(String jobTitle) throws Exception {
 		try {
-			return (T) triggerRepository.findByJobTitle(jobTitle);
+			return (T) triggerRepository.findByJobIdx(jobTitle);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return (T) e;
@@ -70,6 +72,8 @@ public class TriggerProcess {
 	
 	public <T extends Object> T inTrigger(CustomTrigger trigger) throws Exception {
 		try {
+			trigger.setIdx(UUIDUtil.randomString());
+			trigger.setInsertDate(DateUtil.now());
 			return (T) triggerRepository.save(trigger);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,14 +90,6 @@ public class TriggerProcess {
 		}
 	}
 	
-	public <T extends Object> T upTriggerCron(CustomTrigger trigger) throws Exception {
-		try {
-			return (T) triggerRepository.save(trigger);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return (T) e;
-		}
-	}
 	
 	public <T extends Object> T deTrigger(CustomTrigger trigger) throws Exception {
 		try {

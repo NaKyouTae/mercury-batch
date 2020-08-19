@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import com.mercury.config.ApplicationContextProvider;
 import com.mercury.jpa.model.quartz.CustomJob;
 import com.mercury.jpa.repository.quartz.JobRepository;
+import com.mercury.util.DateUtil;
+import com.mercury.util.UUIDUtil;
 
 @Component
 @SuppressWarnings("unchecked")
@@ -64,6 +66,8 @@ public class JobProcess {
 	
 	public <T extends Object> T inJob(CustomJob job) throws Exception {
 		try {
+			job.setIdx(UUIDUtil.randomString());
+			job.setInsertDate(DateUtil.now());
 			return (T) jobRepository.save(job);
 		} catch (Exception e) {
 			e.printStackTrace();

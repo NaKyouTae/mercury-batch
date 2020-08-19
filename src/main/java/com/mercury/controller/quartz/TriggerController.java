@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -108,13 +111,14 @@ public class TriggerController {
 		return (T) res;
 	}
 	
-	public <T extends Object> T seTriggerByJobTitle(String jobTitle) throws Exception{
+	@GetMapping("/job")
+	public <T extends Object> T seTriggerByJobIdx(String jobTitle) throws Exception{
 		ControllerResponse<CustomTrigger> res = new ControllerResponse<>();
 		
 		try {
-			res.setMessage("Success Search Trigger By Job Title :) ");
+			res.setMessage("Success Search Trigger By Job Idx :) ");
 			res.setResultCode(HttpStatus.OK);
-			res.setResult(triggerService.seTriggerByJobTitle(jobTitle));
+			res.setResult(triggerService.seTriggerByJobIdx(jobTitle));
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setMessage(e.getMessage());
@@ -124,24 +128,8 @@ public class TriggerController {
 		
 		return (T) res;
 	}
-	
-	public <T extends Object> T upTriggerCron(@RequestBody CustomTrigger trigger) {
-		ControllerResponse<CustomTrigger> res = new ControllerResponse<>();
 		
-		try {
-			res.setMessage("Success Update Trigger Cron :) ");
-			res.setResultCode(HttpStatus.OK);
-			res.setResult(triggerService.upTriggerCron(trigger));
-		} catch (Exception e) {
-			e.printStackTrace();
-			res.setMessage(e.getMessage());
-			res.setResultCode(HttpStatus.INTERNAL_SERVER_ERROR);
-			res.setResult(null);
-		}
-		
-		return (T) res;
-	}
-	
+	@PutMapping("")
 	public <T extends Object> T upTrigger(@RequestBody CustomTrigger trigger) throws Exception {
 		ControllerResponse<CustomTrigger> res = new ControllerResponse<>();
 		
@@ -159,6 +147,7 @@ public class TriggerController {
 		return (T) res;
 	}
 	
+	@PostMapping("")
 	public <T extends Object> T inTrigger(@RequestBody CustomTrigger trigger) throws Exception {
 		ControllerResponse<CustomTrigger> res = new ControllerResponse<>();
 		
@@ -176,6 +165,7 @@ public class TriggerController {
 		return (T) res;
 	}
 	
+	@DeleteMapping("")
 	public <T extends Object> T deTrigger(@RequestBody CustomTrigger trigger) throws Exception {
 		ControllerResponse<CustomTrigger> res = new ControllerResponse<>();
 		

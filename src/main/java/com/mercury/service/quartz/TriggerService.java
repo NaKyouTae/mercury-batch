@@ -64,32 +64,12 @@ public class TriggerService {
 		}
 	}
 	
-	public <T extends Object> T seTriggerByJobTitle(String jobTitle) throws Exception{
+	public <T extends Object> T seTriggerByJobIdx(String jobTitle) throws Exception{
 		try {
-			return (T) quartzTriggerProcess.seTriggerByJobTitle(jobTitle); 
+			return (T) quartzTriggerProcess.seTriggerByJobIdx(jobTitle); 
 		} catch (Exception e) {
 			return (T) e;
 		}
-	}
-	
-	public <T extends Object> T upTriggerCron(CustomTrigger trigger) {
-		try {
-			Scheduler s = new StdSchedulerFactory().getScheduler();
-			
-			for(JobKey key : s.getJobKeys(GroupMatcher.jobGroupEquals(trigger.getJobTitle()))) {				
-				List<CronTrigger> triggers = (List<CronTrigger>) s.getTriggersOfJob(key);
-				
-				Trigger nt = triggers.get(0);
-				nt = CommonTrigger.trigger(trigger.getTitle(), trigger.getDescription(), trigger.getCron(), s.getJobDetail(key));
-				s.rescheduleJob(nt.getKey(), nt);
-			}
-			
-			quartzTriggerProcess.upTriggerCron(trigger);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return (T) "";
 	}
 	
 	public <T extends Object> T upTrigger(CustomTrigger trigger) throws Exception {
@@ -103,6 +83,20 @@ public class TriggerService {
 	
 	public <T extends Object> T inTrigger(CustomTrigger trigger) throws Exception {
 		try {
+			
+			CustomTrigger dbTrigger = seTriggerByIdx(trigger.getIdx());
+			if(!trigger.getClass().equals(dbTrigger.getCron())) {				
+				Scheduler s = new StdSchedulerFactory().getScheduler();
+				
+				for(JobKey key : s.getJobKeys(GroupMatcher.jobGroupEquals(trigger.getJobIdx()))) {				
+					List<CronTrigger> triggers = (List<CronTrigger>) s.getTriggersOfJob(key);
+					
+					Trigger nt = triggers.get(0);
+					nt = CommonTrigger.trigger(trigger.getTitle(), trigger.getDescription(), trigger.getCron(), s.getJobDetail(key));
+					s.rescheduleJob(nt.getKey(), nt);
+				}
+			}
+			
 			return (T) quartzTriggerProcess.inTrigger(trigger);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -68,15 +68,15 @@ public class MercuryBatchApplication implements WebMvcConfigurer {
 				if(trigger.findAll().size() == 0) {
 					trigger.saveAll(Arrays.asList(
 						// New Week Trigger
-						CustomTrigger.builder().idx(week_t_idx).name("NewWeek").insertDate(DateUtil.now()).title("NewWeek Trigger").description("New Week Update User Mailege").cron("0 5 0 ? * MON").jobTitle(week_t_idx).build(),
+						CustomTrigger.builder().idx(week_t_idx).name("NewWeek").insertDate(DateUtil.now()).title("NewWeek Trigger").description("New Week Update User Mailege").cron("0 5 0 ? * MON").jobIdx(week_t_idx).build(),
 						// NewsLetter Mail Trigger
-						CustomTrigger.builder().idx(news_t_idx).name("NewsLetter").insertDate(DateUtil.now()).title("NewsLetter Trigger").description("for Send NewsLetter Trigger").cron("0 5 0 ? * MON").jobTitle(news_t_idx).build(),
+						CustomTrigger.builder().idx(news_t_idx).name("NewsLetter").insertDate(DateUtil.now()).title("NewsLetter Trigger").description("for Send NewsLetter Trigger").cron("0 5 0 ? * MON").jobIdx(news_t_idx).build(),
 						// Block List Token Delete Trigger
-						CustomTrigger.builder().idx(block_t_idx).name("TokenBlock").insertDate(DateUtil.now()).title("Block Token Trigger").description("Delete Block List Token Trigger").cron("0 0 0 * * ?").jobTitle(block_t_idx).build(),
+						CustomTrigger.builder().idx(block_t_idx).name("TokenBlock").insertDate(DateUtil.now()).title("Block Token Trigger").description("Delete Block List Token Trigger").cron("0 0 0 * * ?").jobIdx(block_t_idx).build(),
 						// Refresh Token Delete Trigger
-						CustomTrigger.builder().idx(refresh_t_idx).name("TokenRefresh").insertDate(DateUtil.now()).title("Refresh Token Trigger").description("Delete Garbage Refresh Token Trigger").cron("0 0 0 * * ?").jobTitle(refresh_t_idx).build(),
+						CustomTrigger.builder().idx(refresh_t_idx).name("TokenRefresh").insertDate(DateUtil.now()).title("Refresh Token Trigger").description("Delete Garbage Refresh Token Trigger").cron("0 0 0 * * ?").jobIdx(refresh_t_idx).build(),
 						// Honor Create Trigger
-						CustomTrigger.builder().idx(honor_t_idx).name("Honor").insertDate(DateUtil.now()).title("Honor Trigger").description("Create Honor Trigger").cron("0 5 0 ? * MON").jobTitle(honor_t_idx).build()
+						CustomTrigger.builder().idx(honor_t_idx).name("Honor").insertDate(DateUtil.now()).title("Honor Trigger").description("Create Honor Trigger").cron("0 5 0 ? * MON").jobIdx(honor_t_idx).build()
 					));	
 				}
 				

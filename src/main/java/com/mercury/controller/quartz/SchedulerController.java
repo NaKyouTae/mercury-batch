@@ -41,12 +41,12 @@ public class SchedulerController {
 	}
 	
 	@DeleteMapping("/stop")
-	public <T extends Object> T stopScheduler(@RequestBody String triggerName) throws Exception {
+	public <T extends Object> T stopScheduler(@RequestBody String jobIdx) throws Exception {
 		ControllerResponse<Boolean> res = new ControllerResponse<>();
 		try {
 			res.setMessage("Success Stop Scheduler :) ");
 			res.setResultCode(HttpStatus.OK);
-			res.setResult(schedulerService.stopSchedule(triggerName));
+			res.setResult(schedulerService.stopSchedule(jobIdx));
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setMessage(e.getMessage());

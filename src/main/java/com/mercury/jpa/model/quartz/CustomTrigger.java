@@ -41,7 +41,7 @@ public class CustomTrigger implements Serializable {
 	private String cron;
 	
 	@Column
-	private String jobTitle;
+	private String jobIdx;
 	
 	@Column
 	private String insertDate;

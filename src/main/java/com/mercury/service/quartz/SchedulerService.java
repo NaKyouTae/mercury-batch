@@ -77,12 +77,12 @@ public class SchedulerService {
 		}
 	}
 	
-	public <T extends Object> T stopSchedule(String idx) throws Exception{
+	public <T extends Object> T stopSchedule(String jobIdx) throws Exception{
 		try {
 			SchedulerFactory sf = new StdSchedulerFactory();
 			Scheduler s = sf.getScheduler();
 			
-			for(JobKey key : s.getJobKeys(GroupMatcher.jobGroupEquals(idx))) {
+			for(JobKey key : s.getJobKeys(GroupMatcher.jobGroupEquals(jobIdx))) {
 				
 				JobDetail jobDetail = s.getJobDetail(key);
 				

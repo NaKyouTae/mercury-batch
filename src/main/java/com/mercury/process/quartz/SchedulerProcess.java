@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import com.mercury.config.ApplicationContextProvider;
 import com.mercury.jpa.model.quartz.CustomScheduler;
 import com.mercury.jpa.repository.quartz.SchedulerRepository;
+import com.mercury.util.DateUtil;
+import com.mercury.util.UUIDUtil;
 
 @Component
 @SuppressWarnings("unchecked")
@@ -70,6 +72,8 @@ public class SchedulerProcess {
 	
 	public <T extends Object> T inScheduler(CustomScheduler scheduler) throws Exception {
 		try {
+			scheduler.setIdx(UUIDUtil.randomString());
+			scheduler.setInsertDate(DateUtil.now());
 			return (T) schedulerRepository.save(scheduler);
 		} catch (Exception e) {
 			e.printStackTrace();

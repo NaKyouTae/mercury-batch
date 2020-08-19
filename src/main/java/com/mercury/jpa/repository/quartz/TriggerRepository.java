@@ -7,7 +7,7 @@ import com.mercury.jpa.model.quartz.CustomTrigger;
 
 @Repository
 public interface TriggerRepository extends JpaRepository<CustomTrigger, Long> {
-	CustomTrigger findByJobTitle(String jobkey);
+	CustomTrigger findByJobIdx(String jobkey);
 	CustomTrigger findByTitle(String title);
 	CustomTrigger findByName(String name);
 	CustomTrigger findByIdx(String idx);

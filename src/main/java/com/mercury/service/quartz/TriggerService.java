@@ -74,15 +74,6 @@ public class TriggerService {
 	
 	public <T extends Object> T upTrigger(CustomTrigger trigger) throws Exception {
 		try {
-			return (T) quartzTriggerProcess.upTrigger(trigger);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return (T) e;
-		}
-	}
-	
-	public <T extends Object> T inTrigger(CustomTrigger trigger) throws Exception {
-		try {
 			
 			CustomTrigger dbTrigger = seTriggerByIdx(trigger.getIdx());
 			if(!trigger.getClass().equals(dbTrigger.getCron())) {				
@@ -97,6 +88,15 @@ public class TriggerService {
 				}
 			}
 			
+			return (T) quartzTriggerProcess.upTrigger(trigger);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (T) e;
+		}
+	}
+	
+	public <T extends Object> T inTrigger(CustomTrigger trigger) throws Exception {
+		try {			
 			return (T) quartzTriggerProcess.inTrigger(trigger);
 		} catch (Exception e) {
 			e.printStackTrace();

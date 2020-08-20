@@ -145,7 +145,7 @@ public class JobController {
 	
 	@DeleteMapping
 	public <T extends Object> T deJob(@RequestBody CustomJob job) throws Exception {
-		ControllerResponse<CustomJob> res = new ControllerResponse<>();
+		ControllerResponse<Boolean> res = new ControllerResponse<>();
 		try {
 			res.setMessage("Success Delete Job :) ");
 			res.setResultCode(HttpStatus.OK);

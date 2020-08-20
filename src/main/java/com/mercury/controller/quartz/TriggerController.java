@@ -167,7 +167,7 @@ public class TriggerController {
 	
 	@DeleteMapping("")
 	public <T extends Object> T deTrigger(@RequestBody CustomTrigger trigger) throws Exception {
-		ControllerResponse<CustomTrigger> res = new ControllerResponse<>();
+		ControllerResponse<Boolean> res = new ControllerResponse<>();
 		
 		try {
 			res.setMessage("Success Delete Trigger :) ");

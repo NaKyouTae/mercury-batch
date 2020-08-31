@@ -1,7 +1,6 @@
 package com.mercury.process.word;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import com.mercury.jpa.repository.word.WordRepository;
@@ -44,7 +43,7 @@ public class WordProcess {
 	
 	public <T extends Object> T seByWordGroup(String group) throws Exception {
 		try {
-			return (T) wordRepository.findByWordGroup(group, Sort.by(Sort.Direction.DESC, "endDate"));
+			return (T) wordRepository.findByWordGroup(group);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return (T) e;

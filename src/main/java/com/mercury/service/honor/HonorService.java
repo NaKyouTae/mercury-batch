@@ -35,8 +35,8 @@ public class HonorService {
 	public <T extends Object> T inHonors() throws Exception{
 		try {
 			
-			List<Three> three = threeService.seByWord();
-			List<Two> two = twoService.seByWord();
+			List<Three> three = threeService.seByPrevWord();
+			List<Two> two = twoService.seByPrevWord();
 			
 			List<Three> limit_three = three.stream().limit(3).collect(Collectors.toList());
 			List<Two> limit_two = two.stream().limit(3).collect(Collectors.toList());

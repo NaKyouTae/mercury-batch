@@ -16,11 +16,20 @@ public class WordService {
 		return (T) weekWordProcess.getLists();
 	}
 	
-	public <T extends Object> T getWeekWords(String group) throws Exception {
-		return (T) weekWordProcess.getWeekWords(group);
+	public <T extends Object> T getNowWords(String group) throws Exception {
+		return (T) weekWordProcess.getNowWords(group);
 	}
 	
 	public <T extends Object> T seWord(String wordIdx) throws Exception {
 		return (T) weekWordProcess.seWord(wordIdx);
+	}
+	
+	public <T extends Object> T seByWordGroup(String group) throws Exception {
+		try {
+			return (T) weekWordProcess.seByWordGroup(group);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (T) e;
+		}
 	}
 }

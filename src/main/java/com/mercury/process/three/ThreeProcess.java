@@ -64,6 +64,7 @@ public class ThreeProcess {
 			return (T) e;
 		}
 	}
+	
 	public <T extends Object> T seByWord() throws Exception {
 		Word dto = weekWordRepository.findByWord("THREE");
 		
@@ -75,5 +76,14 @@ public class ThreeProcess {
 		}
 		
 		return (T) three;
+	}
+
+	public <T extends Object> T seByWordIdx(String wordIdx) throws Exception {
+		try {
+			return (T) threeRepository.findByWordIdx(wordIdx, Sort.by(Sort.Direction.DESC, "point"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (T) e;
+		}
 	}
 }

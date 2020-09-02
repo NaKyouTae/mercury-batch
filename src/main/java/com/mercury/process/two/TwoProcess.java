@@ -57,7 +57,7 @@ public class TwoProcess {
 	
 	public <T extends Object> T seByWordIdx(String wordIdx) throws Exception {
 		try {
-			return (T) threeRepository.findByWordIdx(wordIdx, Sort.by(Sort.Direction.DESC, "point"));
+			return (T) twoRepository.findByWordIdx(wordIdx, Sort.by(Sort.Direction.DESC, "point"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return (T) e;

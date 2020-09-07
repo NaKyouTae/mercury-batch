@@ -24,10 +24,29 @@ public class GradeProcess {
 	}
 	
 	public <T extends Object> T seGrades() throws Exception {
-		return (T) gradeRepository.findAll(Sort.by(Sort.Direction.ASC, "insertDate"));
+		try {
+			return (T) gradeRepository.findAll(Sort.by(Sort.Direction.ASC, "insertDate"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (T) e;
+		}
 	}
 	
 	public <T extends Object> T seGrade(String idx) throws Exception {
-		return (T) gradeRepository.findByIdx(idx);
-	}	
+		try {
+			return (T) gradeRepository.findByIdx(idx);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (T) e;
+		}
+	}
+	
+	public <T extends Object> T getByStartRangeLessThanAndEndRangeGreaterThan(long point) throws Exception {
+		try {
+			return (T) gradeRepository.findByStartRangeLessThanAndEndRangeGreaterThan(point, point);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (T) e;
+		}
+	}
 }

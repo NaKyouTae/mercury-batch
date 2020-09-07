@@ -1,5 +1,7 @@
 package com.mercury.service.user;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import com.mercury.jpa.repository.two.TwoRepository;
 import com.mercury.jpa.repository.user.UserGradeRepository;
 import com.mercury.jpa.repository.word.WordRepository;
 import com.mercury.process.user.UserProcess;
+import com.mercury.service.grade.GradeService;
 
 @Service
 @SuppressWarnings("unchecked")
@@ -35,6 +38,7 @@ public class UserService {
 	private WordRepository wordRepository;
 	@Autowired
 	private GradeRepository gradeRepository;
+	private GradeService gradeService;
 	@Autowired
 	private UserGradeRepository userGradeRepository;
 	
@@ -73,7 +77,7 @@ public class UserService {
 		try {
 			UserGrade userGrade = userGradeRepository.findByUserName(user.getUsername());
 			
-			Grade grade = gradeRepository.findByRange(user.getMileage());
+			Grade grade = gradeService.getByStartRangeLessThanAndEndRangeGreaterThan(user.getMileage());
 			
 			if(!userGrade.getGradeIdx().equals(grade.getIdx())) {
 				userGrade.setGradeIdx(grade.getIdx());
@@ -90,7 +94,8 @@ public class UserService {
 	
 	public <T extends Object> T upUserThreePoint() throws Exception {
 		try {
-			Word word = wordRepository.findByWord("THREE");
+			String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+			Word word = wordRepository.findByStartDateLessThanEqualAndEndDateGreaterThanEqualAndWordGroup(now, now,"THREE");
 			
 			if(word == null) return (T) Boolean.FALSE;
 			
@@ -117,7 +122,8 @@ public class UserService {
 	
 	public <T extends Object> T upUserTwoPoint() throws Exception {
 		try {
-			Word word = wordRepository.findByWord("TWO");
+			String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+			Word word = wordRepository.findByStartDateLessThanEqualAndEndDateGreaterThanEqualAndWordGroup(now, now,"TWO");
 			
 			if(word == null) return (T) Boolean.FALSE;
 			

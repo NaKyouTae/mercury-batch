@@ -26,5 +26,14 @@ public class GradeService {
 		}catch(Exception e) {
 			return (T) e;
 		}
-	}	
+	}
+	
+	public <T extends Object> T getByStartRangeLessThanAndEndRangeGreaterThan(long point) throws Exception {
+		try {
+			return (T) gradeProcess.getByStartRangeLessThanAndEndRangeGreaterThan(point);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (T) e;
+		}
+	}
 }

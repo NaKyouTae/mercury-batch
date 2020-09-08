@@ -8,23 +8,18 @@ import com.mercury.jpa.repository.history.HistoryScheduleRepository;
 
 public class JpaUtil {
 
-	
 	public static void save(JobDataMap data) throws Exception {
-		try {
-			HistoryScheduleRepository hsr = ApplicationContextProvider.getBean("historyScheduleRepository");
-			HistorySchedule hs = new HistorySchedule();
-			 
-			hs.setCron(data.getString("cron"));
-			hs.setTriggerName(data.getString("triggername"));
-			hs.setJobName(data.getString("jobname"));
-			hs.setScheduleName(data.getString("schedulename"));
-			hs.setMessage(data.getString("message"));
-			hs.setStartDate(DateUtil.now());
-			
-			hsr.save(hs);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		HistoryScheduleRepository hsr = ApplicationContextProvider
+				.getBean("historyScheduleRepository");
+		HistorySchedule hs = new HistorySchedule();
+
+		hs.setCron(data.getString("cron"));
+		hs.setTriggerName(data.getString("triggername"));
+		hs.setJobName(data.getString("jobname"));
+		hs.setScheduleName(data.getString("schedulename"));
+		hs.setMessage(data.getString("message"));
+		hs.setStartDate(DateUtil.now());
+
+		hsr.save(hs);
 	}
 }

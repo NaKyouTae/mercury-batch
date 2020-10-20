@@ -38,17 +38,30 @@ public class HonorService {
 		List<Three> three = threeService.seByPrevWord();
 		List<Two> two = twoService.seByPrevWord();
 
-		List<Three> limit_three = three.stream().limit(3)
-				.collect(Collectors.toList());
-		List<Two> limit_two = two.stream().limit(3)
-				.collect(Collectors.toList());
+		List<Three> limit_three = three.stream().limit(3).collect(Collectors.toList());
+		List<Two> limit_two = two.stream().limit(3).collect(Collectors.toList());
 
+		
+		Word word = wordService.seWord(limit_three.get(0).getWordIdx());
+		
 		List<Honor> honorList = new ArrayList<>();
-
+		
+		Honor weekHonor = new Honor();
+		
+		String idx = UUIDUtil.randomString();
+		
+		weekHonor.setIdx(idx);
+		weekHonor.setYear(word.getYear());
+		weekHonor.setMonth(word.getMonth());
+		weekHonor.setWeeks(word.getWeeks());
+		
+		honorList.add(weekHonor);
+		
 		for (Three t : limit_three) {
 			Honor h = new Honor();
 
 			h.setIdx(UUIDUtil.randomString());
+			h.setPidx(idx);
 			h.setUserName(t.getUserName());
 			h.setContentIdx(t.getIdx());
 			h.setContentOne(t.getContentOne());
@@ -58,11 +71,6 @@ public class HonorService {
 			h.setWord(t.getWord());
 			h.setCreateDate(t.getInsertDate());
 
-			Word word = wordService.seWord(t.getWordIdx());
-
-			h.setStartDate(word.getStartDate());
-			h.setEndDate(word.getEndDate());
-
 			honorList.add(h);
 		}
 
@@ -70,6 +78,7 @@ public class HonorService {
 			Honor h = new Honor();
 
 			h.setIdx(UUIDUtil.randomString());
+			h.setPidx(idx);
 			h.setUserName(t.getUserName());
 			h.setContentIdx(t.getIdx());
 			h.setContentOne(t.getContentOne());
@@ -78,11 +87,6 @@ public class HonorService {
 			h.setPoint(t.getPoint());
 			h.setWord(t.getWord());
 			h.setCreateDate(t.getInsertDate());
-
-			Word word = wordService.seWord(t.getWordIdx());
-
-			h.setStartDate(word.getStartDate());
-			h.setEndDate(word.getEndDate());
 
 			honorList.add(h);
 		}

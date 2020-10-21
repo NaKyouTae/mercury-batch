@@ -42,7 +42,8 @@ public class HonorService {
 		List<Two> limit_two = two.stream().limit(3).collect(Collectors.toList());
 
 		
-		Word word = wordService.seWord(limit_three.get(0).getWordIdx());
+		Word threeWord = wordService.seWord(limit_three.get(0).getWordIdx());
+		Word twoWord = wordService.seWord(limit_two.get(0).getWordIdx());
 		
 		List<Honor> honorList = new ArrayList<>();
 		
@@ -51,9 +52,9 @@ public class HonorService {
 		String idx = UUIDUtil.randomString();
 		
 		weekHonor.setIdx(idx);
-		weekHonor.setYear(word.getYear());
-		weekHonor.setMonth(word.getMonth());
-		weekHonor.setWeeks(word.getWeeks());
+		weekHonor.setYear(threeWord.getYear());
+		weekHonor.setMonth(threeWord.getMonth());
+		weekHonor.setWeeks(threeWord.getWeeks());
 		
 		honorList.add(weekHonor);
 		
@@ -70,6 +71,7 @@ public class HonorService {
 			h.setPoint(t.getPoint());
 			h.setWord(t.getWord());
 			h.setCreateDate(t.getInsertDate());
+			h.setDescription(threeWord.getDescription());
 
 			honorList.add(h);
 		}
@@ -87,6 +89,7 @@ public class HonorService {
 			h.setPoint(t.getPoint());
 			h.setWord(t.getWord());
 			h.setCreateDate(t.getInsertDate());
+			h.setDescription(twoWord.getDescription());
 
 			honorList.add(h);
 		}

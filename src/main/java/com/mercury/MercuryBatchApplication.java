@@ -2,6 +2,8 @@ package com.mercury;
 
 import java.util.Arrays;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,6 +23,8 @@ import com.mercury.util.UUIDUtil;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 public class MercuryBatchApplication implements WebMvcConfigurer {
+	
+	private static final Logger LOGGER = LogManager.getLogger(MercuryBatchApplication.class);
 	
 	public static void main(String[] args) {
 		SpringApplication.run(MercuryBatchApplication.class, args);

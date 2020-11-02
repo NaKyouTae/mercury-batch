@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT" follow="true">
+        	<PatternLayout pattern="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} (%4line) %clr{:}{faint} %m%n%xwEx"/>
+        </Console>
+        <File name="File" fileName="D:\nkt\logs\mercury-batch.log" append="true">
+	   		<PatternLayout pattern="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} (%4line) %clr{:}{faint} %m%n%xwEx"/>
+	  	</File>
+	</Appenders>
+	<Loggers>
+		<Root level="DEBUG">
+			<AppenderRef ref="Console" />
+		    <AppenderRef ref="File" />
+		</Root>
+		<Logger name="com.mercury.common.filter.LogFilter" level="DEBUG" additivity="false">
+			<AppenderRef ref="Console" />
+		    <AppenderRef ref="File" />
+		</Logger>
+	</Loggers>
+</Configuration>

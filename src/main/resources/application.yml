@@ -22,12 +22,15 @@ spring:
       username: root
       password: skrbxo12!@
   jpa:
-    show_sql: true
     hibernate:
       ddl-auto: true
     properties:
       hibernate:  
+        show_sql: false
         format_sql: true
     generate-ddl: true
 #  quartz:
 #    job-store-type: jdbc
+logging:
+  level:
+    root: DEBUG

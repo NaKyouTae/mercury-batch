@@ -13,7 +13,7 @@
 			<AppenderRef ref="Console" />
 		    <AppenderRef ref="File" />
 		</Root>
-		<Logger name="com.mercury.common.filter.LogFilter" level="DEBUG" additivity="false">
+		<Logger name="com.mercury.common.filter.LogFilter" level="DEBUG" additivity="true">
 			<AppenderRef ref="Console" />
 		    <AppenderRef ref="File" />
 		</Logger>

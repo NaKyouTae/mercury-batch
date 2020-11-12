@@ -4,6 +4,8 @@
 - OS : Windows
 - IDE : Eclipse
 - Github
+
+## 기술 스택
 - Java 14
 - Spring boot 2.3.0.RELEASE
 - JPA
@@ -11,7 +13,7 @@
 - Gradle
 - Junit5
 
-## 기술
+## 핵심 기술
 - Spring Quartz를 이용하여 Job, Trigger, Schedule을 만들어서 DB로 관리한다.
 
 ## 배치 기능

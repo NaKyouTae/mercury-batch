@@ -9,6 +9,7 @@
 - JPA
 - mariadb
 - Gradle
+- Junit5
 
 ## 기술
 - Spring Quartz를 이용하여 Job, Trigger, Schedule을 만들어서 DB로 관리한다.

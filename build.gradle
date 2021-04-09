@@ -41,7 +41,6 @@ dependencies {
 	
 	// Mail
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
-	compile "com.sun.mail:javax.mail"
 	
 	// Logger log4j2
 	implementation 'org.springframework.boot:spring-boot-starter-log4j2'

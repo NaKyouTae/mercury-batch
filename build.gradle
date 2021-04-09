@@ -53,7 +53,7 @@ dependencies {
 }
 
 test {
-	useJUnitPlatform()
+	exclude '**/*'
 }
 
 configurations {

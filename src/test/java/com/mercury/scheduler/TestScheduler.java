@@ -20,7 +20,7 @@ public class TestScheduler {
 	public void stop() {
 		try {
 			
-			URI uri = new URI("http://localhost:9090/service/batch/scheduler");
+			URI uri = new URI("http://127.0.0.1:9090/service/batch/scheduler");
 
 			RestTemplate rest = new RestTemplate();
 			
